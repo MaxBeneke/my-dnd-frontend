@@ -4,12 +4,11 @@ export const characterSlice = createSlice({
     name: 'character',
     initialState: {},
     reducers: {
-        updateCharacter: (state, action) => {
+        updateCharacter(state, action) {  
             return {
                 ...state,
-                id: action.payload.id,
-                name: action.payload.name,
-                characters: action.payload.characters}
+                ...action.payload
+            }
         }
     }
 })

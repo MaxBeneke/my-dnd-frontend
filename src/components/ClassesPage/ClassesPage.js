@@ -10,7 +10,7 @@ const ClassesPage = () => {
     const history = useHistory();
 
     const handleUpdateClass = (name) => {
-        const updateObj = {name: name}
+        const updateObj = {character_class: name}
         dispatch(updateCharacter(updateObj))
         history.push('/race-background')
     }

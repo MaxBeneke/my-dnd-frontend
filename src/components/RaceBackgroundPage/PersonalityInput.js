@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, TextArea } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
+import { updateCharacter } from '../redux/characterSlice'
 
 
 const PersonalityInput = ({ name, placeholder }) => {
-    const [formData, setFormData] = setState("");
+    const dispatch = useDispatch();
+    // console.log(updateCharacter())
 
     const updateForm = (e) => {
-        
+        const newName = name.toLowerCase();
+        let newObj = {[newName]: e.target.value};
+        // console.log(newObj)
+        dispatch(updateCharacter(newObj))
     }
 
     return (
         <Form.Field 
-            value={formData} 
             onChange={updateForm} 
-            onBlur={updateCharacter}
             control={TextArea}
             label={name}
             placeholder={placeholder} 

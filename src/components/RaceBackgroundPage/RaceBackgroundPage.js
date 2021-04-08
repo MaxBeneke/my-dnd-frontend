@@ -1,12 +1,18 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 import RaceContainer from './RaceContainer'
 import BackgroundContainer from './BackgroundContainer'
 import PersonalityInput from './PersonalityInput'
 import AlignmentInput from './AlignmentInput'
+import { useSelector, useDispatch } from 'react-redux'
 
 const RaceBackgroundPage = () => {
+    const character = useSelector((storeState) => storeState.character)
+    const handleSubmit = () => {
+        if (character.personality && character.ideals && character.race && character.flaws && character.alignment && character.bonds) {}
+    }
     return (
+        <>
        <Grid style={{padding:'.5em'}}>
            <Grid.Row height={8}>
                <Grid.Column width={8}>
@@ -46,6 +52,8 @@ const RaceBackgroundPage = () => {
                </Grid.Column>
            </Grid.Row>
        </Grid>
+       <Button onClick={handleSubmit} content='Submit' floated='right' />
+       </>
     )
 }
 
