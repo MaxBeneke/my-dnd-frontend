@@ -5,15 +5,21 @@ import BackgroundContainer from './BackgroundContainer'
 import PersonalityInput from './PersonalityInput'
 import AlignmentInput from './AlignmentInput'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const RaceBackgroundPage = () => {
+    const history = useHistory();
     const character = useSelector((storeState) => storeState.character)
     const handleSubmit = () => {
-        if (character.personality && character.ideals && character.race && character.flaws && character.alignment && character.bonds) {}
+        if (character.personality && character.ideals && character.race && character.flaws && character.alignment && character.bonds && character.background) {
+            history.push('./choices')
+        } else {
+            alert('Please fill out every field!')
+        }
     }
     return (
         <>
-       <Grid style={{padding:'.5em'}}>
+       <Grid style={{padding:'1em'}}>
            <Grid.Row height={8}>
                <Grid.Column width={8}>
                     <RaceContainer />       

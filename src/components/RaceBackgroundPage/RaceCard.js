@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
 
 const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencies, traitOptions, startingProficiencyOptions, traits, selectedRace, setSelectedRace}) => {
-    // console.log(startingProficiencies)
+    // console.log(traits)
     const storeProficiencies = startingProficiencies.map(prof => prof.name)
     const storeTraits = traits.map(trait => trait.name)
     const dispatch = useDispatch();
