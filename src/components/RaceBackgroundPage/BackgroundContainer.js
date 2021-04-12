@@ -12,7 +12,7 @@ const BackgroundContainer = () => {
             setBackgrounds(backgrounds)
         })
     }, [])
-    console.log(backgrounds)
+
     const allBackgrounds = backgrounds.map(bg => {
         return ( 
             <BackgroundCard

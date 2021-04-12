@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import { request, gql } from 'graphql-request'
 import AlignmentButton from './AlignmentButton'
 

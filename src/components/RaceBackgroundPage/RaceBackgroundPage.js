@@ -4,7 +4,7 @@ import RaceContainer from './RaceContainer'
 import BackgroundContainer from './BackgroundContainer'
 import PersonalityInput from './PersonalityInput'
 import AlignmentInput from './AlignmentInput'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const RaceBackgroundPage = () => {
@@ -30,13 +30,15 @@ const RaceBackgroundPage = () => {
            </Grid.Row>
            <Grid.Row height={8}>
                <Grid.Column width={3}>
-                   <PersonalityInput 
+                   <PersonalityInput
+                   key="Personality"
                    name="Personality" 
                    placeholder="Write down some personality traits..."
                     />
                </Grid.Column>
                <Grid.Column width={3}>
                    <PersonalityInput 
+                   key="Ideals"
                    name="Ideals" 
                    placeholder="Write down your character's ideals..."
                     />
@@ -46,12 +48,14 @@ const RaceBackgroundPage = () => {
                </Grid.Column>
                <Grid.Column width={3}>
                    <PersonalityInput 
+                   key="Flaws"
                    name="Flaws"
                    placeholder="Write down some flaws your character has..."
                     />
                </Grid.Column>
                <Grid.Column width={3}>
                    <PersonalityInput 
+                   key="Bonds"
                    name="Bonds" 
                    placeholder="Write a person or place that your character is attached to..."
                     />

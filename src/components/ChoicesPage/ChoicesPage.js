@@ -72,7 +72,7 @@ const ChoicesPage = () => {
         request('https://www.dnd5eapi.co/graphql', spellQuery, nameVariable).then((spells) => setSpellInfo(spells))
         request('https://www.dnd5eapi.co/graphql', classQuery, nameVariable).then((classData) => setClassInfo(classData))
         request('https://www.dnd5eapi.co/graphql', slotQuery, nameVariable).then((slots) => setSlotInfo(slots))
-    },[])
+    },[classQuery, slotQuery, spellQuery])
     
     return (
         <Grid>
