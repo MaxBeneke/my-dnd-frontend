@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Dropdown } from 'semantic-ui-react'
 
 const EquipmentChoices = ( { classInfo }) => {
-    console.log(classInfo)
     // const [counter, setCounter] = useState([])
 
     // const handleClick = (e) => {
@@ -17,17 +16,20 @@ const EquipmentChoices = ( { classInfo }) => {
     //     }
     // }
     console.log(classInfo?.class?.starting_equipment_options)
-    const equipmentChoices = classInfo?.class?.starting_equipment_options?.map((chooseObj, index) => {
+    const equipmentChoices = classInfo?.class?.starting_equipment_options?.map(chooseObj => {
         return ( 
             <Dropdown 
                 placeholder='Choose 1'
                 fluid
                 selection
-                options={chooseObj.from.map(equipOption => ({
+                options={chooseObj.from.map(equipOption => (
+                    
+                    {
                     key: `${equipOption?.equipment?.name}`,
                     text: `${equipOption?.equipment?.name}`,
                     value: `${equipOption?.equipment?.name}`
-                }))}
+                }
+                ))}
             />
         )   
         

@@ -11,6 +11,8 @@ const ChoicesPage = () => {
     const [spellInfo, setSpellInfo] = useState([])
     const [classInfo, setClassInfo] = useState([])
     const [slotInfo, setSlotInfo] = useState([])
+    const [cantripInfo, setCantripInfo] = useState([])
+
     const character = useSelector((storeState) => storeState.character)
 
     const nameVariable = {name: character.character_class}
@@ -68,10 +70,19 @@ const ChoicesPage = () => {
         }
       }
     `
+    const cantripQuery = gql`
+    query getSpells($name: String){
+        spells(filter: {classes: {name: $name}, level: 0}){
+          name
+          desc
+        }	
+      }
+    `
     useEffect(() => {
         request('https://www.dnd5eapi.co/graphql', spellQuery, nameVariable).then((spells) => setSpellInfo(spells))
         request('https://www.dnd5eapi.co/graphql', classQuery, nameVariable).then((classData) => setClassInfo(classData))
         request('https://www.dnd5eapi.co/graphql', slotQuery, nameVariable).then((slots) => setSlotInfo(slots))
+        request('https://www.dnd5eapi.co/graphql', cantripQuery, nameVariable).then((cantrips) => setCantripInfo(cantrips))
     },[classQuery, slotQuery, spellQuery])
     
     return (
@@ -97,7 +108,7 @@ const ChoicesPage = () => {
                 </Grid.Column>
                 <Grid.Column width={8}>
                     <CantripChoices
-                        spellInfo={spellInfo}
+                        cantripInfo={cantripInfo}
                         slotInfo={slotInfo}
                     />
                 </Grid.Column>
