@@ -1,19 +1,32 @@
 import React, { useState } from 'react'
 import { Popup, Form } from 'semantic-ui-react'
+import { overrideCharacter } from '../redux/characterSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const SpellChoices = ( spellInfo ) => {
+    const character = useSelector((storeState) => storeState.character)
+    const dispatch = useDispatch();
     const [counter, setCounter] = useState([])
     const chooseFrom = spellInfo?.slotInfo?.level?.spellcasting?.spells_known || spellInfo?.slotInfo?.level?.spellcasting?.spell_slots_level_1
     
     const handleClick = (e) => {
         const number = parseInt(e.target.name)
+        const spellName = e.target.value
         if (counter.includes(number)) {
             let arr =  counter.filter(num => num !== number)
             setCounter(arr)
+            let reduxArr = character?.spells?.filter(spell => spell !== spellName)
+            dispatch(overrideCharacter({...character, spells: reduxArr}))
         } else if (counter.length + 1 > chooseFrom) {
             alert(`You may only choose ${chooseFrom}`)
         } else {
             setCounter([...counter, number])
+            if (character.spells) {
+                let reduxArr = [...character.spells, spellName]
+                dispatch(overrideCharacter({...character, spells: reduxArr}))
+            } else {
+            dispatch(overrideCharacter({...character, spells: [spellName]}))
+            }
         }
     }
     
@@ -21,6 +34,7 @@ const SpellChoices = ( spellInfo ) => {
        return <Popup
                 trigger={
                     <Form.Field 
+                    value={spellObj.name}
                     label={spellObj.name} 
                     control='input'
                     type='checkbox'
@@ -34,7 +48,6 @@ const SpellChoices = ( spellInfo ) => {
                 <Popup.Content>{spellObj.desc[0]}</Popup.Content>    
             </Popup>
     })
-    console.log(chooseFrom)
     
     
     

@@ -9,10 +9,16 @@ export const characterSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+        },
+        overrideCharacter(state, action) {
+            return {
+                ...action.payload
+            }
         }
     }
 })
 
 export default characterSlice.reducer;
 const updateCharacter = characterSlice.actions.updateCharacter
-export { updateCharacter }
+const overrideCharacter = characterSlice.actions.overrideCharacter
+export { updateCharacter, overrideCharacter }

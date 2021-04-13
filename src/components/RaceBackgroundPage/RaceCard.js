@@ -8,12 +8,13 @@ const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencie
     const storeProficiencies = startingProficiencies.map(prof => prof.name)
     const storeTraits = traits.map(trait => trait.name)
     const dispatch = useDispatch();
+    const uploadLanguages = languages.map(langObj => langObj.name)
 
     const handleClick = (name) => {
         const newIndex = selectedRace === name ? -1 : name
         setSelectedRace(newIndex)
         if (newIndex !== -1) {
-            const updateObj = {race: newIndex, speed: speed, languages: languages, proficiencies: storeProficiencies, traits: storeTraits}
+            const updateObj = {race: newIndex, speed: speed, languages: uploadLanguages, proficiencies: storeProficiencies, traits: storeTraits}
             dispatch(updateCharacter(updateObj))
         }
     }

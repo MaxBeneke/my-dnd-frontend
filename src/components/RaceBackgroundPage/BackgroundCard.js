@@ -7,10 +7,11 @@ const BackgroundCard = ({ name, desc, skills, selectedBG, setSelectedBG}) => {
     const dispatch = useDispatch();
 
     const handleClick = (name) => {
+        console.log(skills)
         const newIndex = selectedBG === name ? -1 : name
         setSelectedBG(newIndex)
         if (newIndex !== -1) {
-            const updateObj = {background: newIndex}
+            const updateObj = {background: newIndex, skills: skills}
             dispatch(updateCharacter(updateObj))
         }
     }
