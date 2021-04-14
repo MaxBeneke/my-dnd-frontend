@@ -14,7 +14,7 @@ export const characterSlice = createSlice({
             return {
                 ...action.payload
             }
-        }
+        },
     }
 })
 

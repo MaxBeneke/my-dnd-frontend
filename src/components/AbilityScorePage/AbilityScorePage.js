@@ -4,11 +4,10 @@ import ScoreCounter from './ScoreCounter'
 import { Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateUser } from '../redux/userSlice'
+import { addCharacter } from '../redux/userSlice'
 import { updateCharacter } from '../redux/characterSlice'
 
 const AbilityScorePage = () => {
-    const user = useSelector((storeState) => storeState.user)
     const dispatch = useDispatch();
     const character = useSelector((storeState) => storeState.character)
     const history = useHistory();
@@ -24,6 +23,7 @@ const AbilityScorePage = () => {
         }
       }
     `
+    const abilityRef = {"STR": "strength", "DEX": "dexterity", "CON": "constitution", "INT": "intelligence", "WIS": "wisdom", "CHA": "charisma"}
 
     const addBigCounter = (num) => {
         setBigCounter(count => count + num)
@@ -33,14 +33,24 @@ const AbilityScorePage = () => {
     }
 
     useEffect(() =>{
+        if (!character.strength && !character.dexterity){
+            dispatch(updateCharacter({strength: 8, dexterity: 8, constitution: 8, intelligence: 8, wisdom: 8, charisma: 8}))
+        }
         request('https://www.dnd5eapi.co/graphql', query).then(scores => {setAbilityScores(scores.abilityScores)})
     },[])
 
     const handleAC = () => {
-        let ac = (Math.floor((character.dexterity - 10) / 2)) + 10
-        let hp = (Math.floor((character.constitution - 10) / 2)) + character.hit_die
+        // Make racial ability bonuses usable
+        let result = {};
+
+        for(let i = 0; i < character?.abilityBonuses.length; i++) {
+            result[abilityRef[character.abilityBonuses[i].ability_score.name]] = character[abilityRef[character.abilityBonuses[i].ability_score.name]] + character.abilityBonuses[i].bonus
+        }
+        // Add racial abilities and use them for AC/HP
+        let ac = result.dexterity ? (Math.floor((result.dexterity - 10) / 2)) + 10 : (Math.floor((character.dexterity - 10) / 2)) + 10
+        let hp = result.constitution ? (Math.floor((result.constitution - 10) / 2)) + character.hit_die :(Math.floor((character.constitution - 10) / 2)) + character.hit_die
         setArmorCheck(true)
-        dispatch(updateCharacter({armorclass: ac, hp_max: hp, hp_current: hp}))
+        dispatch(updateCharacter({...result, armorclass: ac, hp_max: hp, hp_current: hp}))
     }
 
     const handleSubmit = () => {
@@ -55,10 +65,9 @@ const AbilityScorePage = () => {
                 body: JSON.stringify(character)
             })
             .then(r => r.json())
-            .then(updatedUser => {
-                dispatch(updateUser(updatedUser));
-                console.log(updatedUser.characters)
-                history.push(`./character/${updatedUser.characters[updatedUser.characters.length - 1].id}`)
+            .then(newCharacter => {
+                dispatch(addCharacter(newCharacter));
+                history.push(`./character/${newCharacter.id}`)
             })
         }
     }

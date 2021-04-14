@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { classImages } from '../../images/classImages'
 import { updateCharacter } from '../redux/characterSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { request, gql } from 'graphql-request'
 
 const ClassesPage = () => {
     const dispatch = useDispatch();

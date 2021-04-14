@@ -14,7 +14,7 @@ const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencie
         const newIndex = selectedRace === name ? -1 : name
         setSelectedRace(newIndex)
         if (newIndex !== -1) {
-            const updateObj = {race: newIndex, speed: speed, languages: uploadLanguages, proficiencies: storeProficiencies, traits: storeTraits}
+            const updateObj = {race: newIndex, speed: speed, languages: uploadLanguages, proficiencies: storeProficiencies, traits: storeTraits, abilityBonuses: abilityBonuses}
             dispatch(updateCharacter(updateObj))
         }
     }

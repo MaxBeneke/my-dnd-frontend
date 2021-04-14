@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Popup, Button, Segment } from 'semantic-ui-react'
 import { updateCharacter } from '../redux/characterSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ScoreCounter = ({ abbr, fullName, desc, bigCounter, addBigCounter, subtractBigCounter }) => {
     const dispatch = useDispatch();
+    const character = useSelector((storeState) => storeState.character)
     const [counter, setCounter] = useState(8)
 
     const handleAdd = () => {
@@ -38,7 +39,7 @@ const ScoreCounter = ({ abbr, fullName, desc, bigCounter, addBigCounter, subtrac
     }
     return (
         <>
-        <h3>{counter}</h3>
+        <h3>{character[fullName.toLowerCase()]}</h3>
         <Button.Group>
         <Button onClick={handleSubtract}> - </Button>
         <Popup trigger={

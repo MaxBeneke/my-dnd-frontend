@@ -133,7 +133,7 @@ const CharacterSheet = () => {
         <Button.Group>
         <Button onClick={handleSaveChange}> Save Changes </Button>
         <Button.Or/>
-        <Button positive onClick={() => {history.push(`./user/${user.id}`)}}> Delete Changes </Button>
+        <Button positive onClick={() => {history.push(`/user/${user.id}`)}}> Delete Changes </Button>
         </Button.Group>
         </>
     )

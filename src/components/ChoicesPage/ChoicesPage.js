@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Button } from 'semantic-ui-react'
 import { gql, request } from 'graphql-request'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateCharacter } from '../redux/characterSlice'
 import CantripChoices from './CantripChoices'
 import SkillChoices from './SkillChoices'
 import EquipmentChoices from './EquipmentChoices'
@@ -10,10 +11,13 @@ import { useHistory } from 'react-router-dom'
 
 const ChoicesPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [spellInfo, setSpellInfo] = useState([])
   const [classInfo, setClassInfo] = useState([])
   const [slotInfo, setSlotInfo] = useState([])
   const [cantripInfo, setCantripInfo] = useState([])
+
+  const abilityRef = {"STR": "strength", "DEX": "dexterity", "CON": "constitution", "INT": "intelligence", "WIS": "wisdom", "CHA": "charisma"}
 
   const character = useSelector((storeState) => storeState.character)
 
@@ -88,6 +92,8 @@ const ChoicesPage = () => {
   },[classQuery, slotQuery, spellQuery])
   
   const handleSubmit = () => {
+    const savingThrows = classInfo.class.saving_throws.map(st => abilityRef[st.name])
+    dispatch(updateCharacter({skills: [...character.skills, ...savingThrows]}))
     history.push('./ability-score')
   }
   return (

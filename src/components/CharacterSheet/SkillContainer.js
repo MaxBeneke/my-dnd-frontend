@@ -29,7 +29,7 @@ const SkillContainer = () => {
                 control='input'
                 type='checkbox'
                 name={skill}
-                checked={character.skills?.includes(skill)}
+                checked={character.skills?.includes(skill.charAt(0).toUpperCase() + skill.slice(1))}
                 onChange={handleClick}
                 />
     })
