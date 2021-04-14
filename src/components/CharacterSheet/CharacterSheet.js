@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateUser } from '../redux/userSlice'
+import { useHistory } from 'react-router-dom'
 import { overrideCharacter } from '../redux/characterSlice'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 import CharacterInfoCard from './CharacterInfoCard'
 import HPContainer from './HPContainer'
 import AbilityScoreContainer from './AbilityScoreContainer'
@@ -15,16 +16,32 @@ import SpellsContainer from './SpellsContainer'
 import PersonalityContainer from './PersonalityContainer'
 
 const CharacterSheet = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const params = useParams()
     const user = useSelector(storeState => storeState.user)
     const character = user.characters.find(character => parseInt(character.id) === parseInt(params.id))
+    const characterStore = useSelector((storeState) => storeState.character)
     
     useEffect(() => {
         dispatch(overrideCharacter(character))
     }, [])
 
+    const handleSaveChange = () => {
+        fetch(`http://localhost:3000/character/${character.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(characterStore)
+        })
+        .then(r => r.json())
+        .then(userObj => {
+            dispatch(updateUser(userObj))
+            history.push(`/user/${userObj.id}`)
+        })
+    }
+
     return (
+        <>
         <Grid>
             <Grid.Row height={4}>
                 <Grid.Column width={5}>
@@ -113,6 +130,12 @@ const CharacterSheet = () => {
             
 
         </Grid>
+        <Button.Group>
+        <Button onClick={handleSaveChange}> Save Changes </Button>
+        <Button.Or/>
+        <Button positive onClick={() => {history.push(`./user/${user.id}`)}}> Delete Changes </Button>
+        </Button.Group>
+        </>
     )
 }
 

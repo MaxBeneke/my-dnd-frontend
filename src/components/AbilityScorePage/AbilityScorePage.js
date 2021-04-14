@@ -40,6 +40,9 @@ const AbilityScorePage = () => {
         if (bigCounter > 0) {
             alert('You still have more points to assign!')
         } else {
+            let ac = (Math.floor((character.dexterity - 10) / 2)) + 10
+            let hp = (Math.floor((character.constitution - 10) / 2)) + character.hit_die
+            dispatch(updateCharacter({armorclass: ac, hp_max: hp, hp_current: hp}))
             fetch('http://localhost:3000/characters', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
