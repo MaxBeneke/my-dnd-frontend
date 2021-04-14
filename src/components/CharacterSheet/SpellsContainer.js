@@ -13,7 +13,7 @@ const SpellsContainer = () => {
         <Item.Content>
           <Item.Header>Cantrips</Item.Header>
             <Item.Description>
-                {character?.cantrips?.length === 0 ? "None to show" : character?.cantrips?.join(', ')}
+                {character?.cantrips?.length === 0 || !character?.cantrips ? "None to show" : character?.cantrips?.join(', ')}
             </Item.Description>
         </Item.Content>
       </Item>
@@ -22,7 +22,7 @@ const SpellsContainer = () => {
         <Item.Content>
           <Item.Header>Spells</Item.Header>
             <Item.Description>
-            {character?.spells?.length === 0 ? "None to show" : character?.spells?.join(', ')}
+            {character?.spells?.length === 0 || !character?.spells ? "None to show" : character?.spells?.join(', ')}
             </Item.Description>
         </Item.Content>
       </Item>

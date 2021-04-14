@@ -62,7 +62,6 @@ const RaceContainer = () => {
         useEffect(() => {
             request('https://www.dnd5eapi.co/graphql', query)
             .then((data) => {
-                console.log(data.races)
                 setRaces(data.races)
             })
         }, [query])

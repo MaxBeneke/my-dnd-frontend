@@ -7,15 +7,6 @@ const EquipmentChoices = ( { classInfo }) => {
     const character = useSelector((storeState) => storeState.character)
     const dispatch = useDispatch();
     const [loggedClick, setLoggedClick] = useState(-1)
-    const [counter, setCounter] = useState(0)
-
-    const equipRepository = {
-        1: "Dagger",
-        2: "40 Gold",
-        3: "Shortsword",
-        4: "50ft Rope",
-        5: "Crossbow"
-    }
 
     const handleChange = (e) => {
         console.log(e.target)
@@ -47,13 +38,10 @@ const EquipmentChoices = ( { classInfo }) => {
                 onClick={logClick}
                 onChange={handleChange}
                 options={chooseObj.from.map(equipOption => {
-                    // if (equipOption?.equipment?.name === undefined) {
-                    //     setCounter(count => count + 1)
-                    // }
                     return {
-                    key: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : equipRepository[counter]}`,
-                    text: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : equipRepository[counter]}`,
-                    value: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : equipRepository[counter]}`
+                    key: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : "10 Gold"}`,
+                    text: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : "10 Gold"}`,
+                    value: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : "10 Gold"}`
                     }
                 })}
             />

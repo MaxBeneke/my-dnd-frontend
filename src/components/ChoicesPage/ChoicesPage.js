@@ -63,14 +63,14 @@ const ChoicesPage = () => {
   `
   const slotQuery = gql`
   query getSpellSlots($name: String) {
-      level(filter: {class: {name: $name}}){
-        spellcasting{
-          spells_known
-          spell_slots_level_1
-          cantrips_known
-        }
+    level(filter: {class: {name: $name} level: 1}){
+      spellcasting{
+        spells_known
+        spell_slots_level_1
+        cantrips_known
       }
     }
+  }
   `
   const cantripQuery = gql`
   query getSpells($name: String){

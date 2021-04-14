@@ -1,15 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid, Button } from 'semantic-ui-react'
 import RaceContainer from './RaceContainer'
 import BackgroundContainer from './BackgroundContainer'
 import PersonalityInput from './PersonalityInput'
 import AlignmentInput from './AlignmentInput'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateCharacter } from '../redux/characterSlice'
 import { useHistory } from 'react-router-dom'
+import { request, gql } from 'graphql-request'
 
 const RaceBackgroundPage = () => {
     const history = useHistory();
     const character = useSelector((storeState) => storeState.character)
+    const dispatch = useDispatch();
+
+    const query = gql`
+    query getFeature($name: String) {
+        features(filter: {class: {name: $name}, level: 1}) {
+              name
+          desc
+          class{
+            name
+          }
+        }
+      }
+    `
+    const classNameVar = {name: character.character_class}
+
+    useEffect(() => {
+        request('https://www.dnd5eapi.co/graphql', query, classNameVar).then(data => {
+            const features = data.features.map(feat => feat.name)
+            dispatch(updateCharacter({features: features}))
+    })
+    } ,[])
+    
     const handleSubmit = () => {
         if (character.personality && character.ideals && character.race && character.flaws && character.alignment && character.bonds && character.background) {
             history.push('./choices')

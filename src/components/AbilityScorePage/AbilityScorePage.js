@@ -14,7 +14,7 @@ const AbilityScorePage = () => {
     const history = useHistory();
     const [abilityScores, setAbilityScores] = useState([])
     const [bigCounter, setBigCounter] = useState(27)
-    console.log(abilityScores)
+    const [armorCheck, setArmorCheck] = useState(false)
     const query = gql`
     {
         abilityScores{
@@ -36,30 +36,29 @@ const AbilityScorePage = () => {
         request('https://www.dnd5eapi.co/graphql', query).then(scores => {setAbilityScores(scores.abilityScores)})
     },[])
 
+    const handleAC = () => {
+        let ac = (Math.floor((character.dexterity - 10) / 2)) + 10
+        let hp = (Math.floor((character.constitution - 10) / 2)) + character.hit_die
+        setArmorCheck(true)
+        dispatch(updateCharacter({armorclass: ac, hp_max: hp, hp_current: hp}))
+    }
+
     const handleSubmit = () => {
         if (bigCounter > 0) {
             alert('You still have more points to assign!')
+        } else if (!armorCheck) {
+            alert('You have to add your race bonuses')
         } else {
-            let ac = (Math.floor((character.dexterity - 10) / 2)) + 10
-            let hp = (Math.floor((character.constitution - 10) / 2)) + character.hit_die
-            dispatch(updateCharacter({armorclass: ac, hp_max: hp, hp_current: hp}))
             fetch('http://localhost:3000/characters', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(character)
             })
             .then(r => r.json())
-            .then(newChar => {
-                fetch('http://localhost:3000/users/login', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({name: user.name})
-                })
-                .then(r => r.json())
-                .then(user => {
-                    dispatch(updateUser(user));
-                    history.push(`./character/${newChar.id}`)
-                })
+            .then(updatedUser => {
+                dispatch(updateUser(updatedUser));
+                console.log(updatedUser.characters)
+                history.push(`./character/${updatedUser.characters[updatedUser.characters.length - 1].id}`)
             })
         }
     }
@@ -80,7 +79,8 @@ const AbilityScorePage = () => {
         <div>
             <h1>{bigCounter}</h1>
          {scoreMap}
-         <Button onClick={handleSubmit}>Create my Character!</Button>   
+         <Button onClick={handleSubmit}>Create my Character!</Button>
+         {bigCounter === 0 && <Button onClick={handleAC}>Add my Bonuses</Button>}   
         </div>
     )
 }

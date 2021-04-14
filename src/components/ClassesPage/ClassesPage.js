@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { classImages } from '../../images/classImages'
 import { updateCharacter } from '../redux/characterSlice'
 import { useSelector, useDispatch } from 'react-redux'
+import { request, gql } from 'graphql-request'
 
 const ClassesPage = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,6 @@ const ClassesPage = () => {
     const character = useSelector((storeState) => storeState.character)
 
     const handleUpdateClass = (name, die) => {
-        
         const updateObj = {character_class: name, user_id: user.id, level: 1, hit_die: die}
         dispatch(updateCharacter(updateObj))
         history.push('/race-background')
