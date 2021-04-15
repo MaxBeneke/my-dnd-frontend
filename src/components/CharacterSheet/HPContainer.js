@@ -6,15 +6,15 @@ import RollDiceCard from './RollDiceCard'
 import HPCard from './HPCard'
 
 
-const HPContainer = ({hp_max, hp_current, armorclass, speed, dexterity}) => {
+const HPContainer = () => {
     return (
         <Grid columns={2} divided>
             <Grid.Row>
                 <Grid.Column>
-                    <HPCard hp_max={hp_max} hp_current={hp_current} armorclass={armorclass}/>
+                    <HPCard />
                 </Grid.Column>
                 <Grid.Column>
-                    <SpeedCard speed={speed} dexterity={dexterity} />
+                    <SpeedCard />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

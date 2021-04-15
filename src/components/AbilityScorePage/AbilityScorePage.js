@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { request, gql } from 'graphql-request'
 import ScoreCounter from './ScoreCounter'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid, Segment, Header, List } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addCharacter } from '../redux/userSlice'
@@ -37,7 +37,7 @@ const AbilityScorePage = () => {
             dispatch(updateCharacter({strength: 8, dexterity: 8, constitution: 8, intelligence: 8, wisdom: 8, charisma: 8}))
         }
         request('https://www.dnd5eapi.co/graphql', query).then(scores => {setAbilityScores(scores.abilityScores)})
-    },[])
+    },[character.dexterity, character.strength, dispatch, query])
 
     const handleAC = () => {
         // Make racial ability bonuses usable
@@ -73,24 +73,39 @@ const AbilityScorePage = () => {
     }
 
     const scoreMap = abilityScores.map(score => {
-        return <ScoreCounter
-            abbr={score.name}
-            fullName={score.full_name}
-            desc={score.desc}
-            bigCounter={bigCounter}
-            addBigCounter={addBigCounter}
-            subtractBigCounter={subtractBigCounter}        
-        />
+        return <Grid.Column>
+                <ScoreCounter
+                    abbr={score.name}
+                    fullName={score.full_name}
+                    desc={score.desc}
+                    bigCounter={bigCounter}
+                    addBigCounter={addBigCounter}
+                    subtractBigCounter={subtractBigCounter}        
+                />
+                </Grid.Column>
     })
 
+    const bonusMap = character.abilityBonuses.map(score => {
+        return (
+            <List.Item>
+                +{score.bonus} to {abilityRef[score.ability_score.name].charAt(0).toUpperCase() + abilityRef[score.ability_score.name].slice(1)}
+            </List.Item>
+        )
+    })
 
     return (
-        <div>
-            <h1>{bigCounter}</h1>
+        <Segment textAlign="center" basic>
+            <Header as='h1'>Points Left: {bigCounter}</Header>
+        <Grid columns={6}>
          {scoreMap}
-         <Button onClick={handleSubmit}>Create my Character!</Button>
-         {bigCounter === 0 && <Button onClick={handleAC}>Add my Bonuses</Button>}   
-        </div>
+        </Grid>
+        <Button onClick={handleSubmit}>Create my Character!</Button>
+        {bigCounter === 0 && <Button onClick={handleAC}>Add my Bonuses</Button>}
+        <Header as='h5'>{character.race} bonuses:</Header>
+        <List>
+            {bonusMap}
+        </List>
+        </Segment>
     )
 }
 

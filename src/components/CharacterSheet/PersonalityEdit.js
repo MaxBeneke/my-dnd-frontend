@@ -21,17 +21,12 @@ const PersonalityEdit = ({ name }) => {
           <Item.Meta>Double Click to Edit</Item.Meta>
           {isEdit ? (
               <Form.Field 
+              autoFocus='true'
               onChange={handleChange} 
               control={TextArea}
               value={character[nameVar]}
               onBlur={() => setIsEdit(false)}
           /> )
-        //   <textarea 
-        //     name={nameVar}
-        //     value={character[nameVar]}
-        //     onBlur={() => setIsEdit(false)}
-        //     onChange={handleChange}
-        //   />) 
             : (
             <Item.Description onDoubleClick={() => setIsEdit(true)}>
                 {character[nameVar]}

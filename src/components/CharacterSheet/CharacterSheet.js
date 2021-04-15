@@ -8,12 +8,9 @@ import { Grid, Button } from 'semantic-ui-react'
 import CharacterInfoCard from './CharacterInfoCard'
 import HPContainer from './HPContainer'
 import AbilityScoreContainer from './AbilityScoreContainer'
-import EquipmentContainer from './EquipmentContainer'
-import FeatureContainer from './FeatureContainer'
-import ProficiencyContainer from './ProficiencyContainer'
 import SkillContainer from './SkillContainer'
-import SpellsContainer from './SpellsContainer'
 import PersonalityContainer from './PersonalityContainer'
+import ListContainer from './ListContainer'
 
 const CharacterSheet = () => {
     const history = useHistory();
@@ -55,14 +52,7 @@ const CharacterSheet = () => {
                     />
                 </Grid.Column>
                 <Grid.Column width={5}>
-                    <HPContainer 
-                        hp_max={character?.hp_max}
-                        hp_current={character?.hp_current}
-                        armorclass={character?.armorclass}
-                        speed={character?.speed}
-                        dexterity={character?.dexterity}
-                        character={character}
-                    />   
+                    <HPContainer />   
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <PersonalityContainer 
@@ -98,32 +88,37 @@ const CharacterSheet = () => {
             </Grid.Column>
             <Grid.Column width={5}>
                 <Grid.Row height={6}>
-                    <FeatureContainer
-                        features={character?.features}
-                        character={character}
+                    <ListContainer
+                        key='features'
+                        listVar='features'
                     />
                 </Grid.Row>
                 <Grid.Row height={6}>
-                    <ProficiencyContainer
-                        languages={character?.languages}
-                        traits={character?.traits}
-                        character={character}
+                    <ListContainer
+                        key='traits'
+                        listVar='traits'
+                    />
+                    <ListContainer
+                        key='languages'
+                        listVar='languages'
                     />
                 </Grid.Row>
             </Grid.Column>
             <Grid.Column width={6}>
                 <Grid.Row height={6}>
-                    <EquipmentContainer
-                        equipment={character?.equipment}
-                        character={character}
+                    <ListContainer
+                        key='equipment'
+                        listVar='equipment'
                     />
                 </Grid.Row>
                 <Grid.Row height={6}>
-                    <SpellsContainer
-                        spells={character?.spells}
-                        cantrips={character?.cantrips}
-                        spellcasting_ability={character?.spellcasting_ability}
-                        character={character}
+                    <ListContainer
+                        key='cantrips'
+                        listVar='cantrips'
+                    />
+                    <ListContainer
+                        key='spells'
+                        listVar='spells'
                     />
                 </Grid.Row>
             </Grid.Column>
@@ -133,7 +128,7 @@ const CharacterSheet = () => {
         <Button.Group>
         <Button onClick={handleSaveChange}> Save Changes </Button>
         <Button.Or/>
-        <Button positive onClick={() => {history.push(`/user/${user.id}`)}}> Delete Changes </Button>
+        <Button positive onClick={() => {history.push(`/user/${user.id}`)}}> Revert Changes </Button>
         </Button.Group>
         </>
     )

@@ -2,27 +2,27 @@ import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import AbilityScoreCard from './AbilityScoreCard'
 
-const AbilityScoreContainer = ({ strength, dexterity, constitution, intelligence, wisdom, charisma }) => {
+const AbilityScoreContainer = () => {
    
     return (
         <Grid rows={6}>
             <Grid.Row>
-                <AbilityScoreCard key="Strength" ability="Strength" score={strength} />
+                <AbilityScoreCard key="strength" ability="strength" />
             </Grid.Row>
             <Grid.Row>
-                <AbilityScoreCard key="Dexterity" ability="Dexterity" score={dexterity} />
+                <AbilityScoreCard key="dexterity" ability="dexterity" />
             </Grid.Row>
             <Grid.Row>
-                <AbilityScoreCard key="Constitution" ability="Constitution" score={constitution} />
+                <AbilityScoreCard key="constitution" ability="constitution" />
             </Grid.Row>
             <Grid.Row>
-                <AbilityScoreCard key="Intelligence" ability="Intelligence" score={intelligence} />
+                <AbilityScoreCard key="intelligence" ability="intelligence" />
             </Grid.Row>
             <Grid.Row>
-                <AbilityScoreCard key="Wisdom" ability="Wisdom" score={wisdom} />
+                <AbilityScoreCard key="wisdom" ability="wisdom" />
             </Grid.Row>
             <Grid.Row>
-                <AbilityScoreCard key="Charisma" ability="Charisma" score={charisma} />
+                <AbilityScoreCard key="charisma" ability="charisma" />
             </Grid.Row>
         </Grid>
     )

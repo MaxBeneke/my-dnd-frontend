@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Popup, Button, Segment } from 'semantic-ui-react'
+import { Popup, Button, Segment, Icon, Header } from 'semantic-ui-react'
 import { updateCharacter } from '../redux/characterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const ScoreCounter = ({ abbr, fullName, desc, bigCounter, addBigCounter, subtractBigCounter }) => {
+const ScoreCounter = ({ fullName, desc, bigCounter, addBigCounter, subtractBigCounter }) => {
     const dispatch = useDispatch();
     const character = useSelector((storeState) => storeState.character)
     const [counter, setCounter] = useState(8)
@@ -38,20 +38,23 @@ const ScoreCounter = ({ abbr, fullName, desc, bigCounter, addBigCounter, subtrac
         }
     }
     return (
-        <>
-        <h3>{character[fullName.toLowerCase()]}</h3>
-        <Button.Group>
-        <Button onClick={handleSubtract}> - </Button>
-        <Popup trigger={
-        <Button.Or text={abbr}/>
-        }>
-        <Popup.Content>{desc.join(' ')}</Popup.Content>   
-        </Popup>
-       
-        <Button positive onClick={handleAdd}> + </Button>
-        </Button.Group>
-        <Segment tiny >{counter}</Segment>
-        </>
+        <Segment basic>
+            <Header as='h3'>
+                <Popup basic trigger={
+                    <Icon size='mini' corner name='question circle outline' />
+                }>
+                <Popup.Content>{desc}</Popup.Content>
+                </Popup>
+                <Header.Content>{fullName}</Header.Content>
+            </Header>
+
+        <div>
+        <Button attached='left' onClick={handleSubtract}> <Icon name='minus'/> </Button>
+        <Button attached='right' onClick={handleAdd}> <Icon name='plus'/> </Button>
+        </div>
+        
+        <Segment textAlign='center' basic size='huge' compact>{character[fullName.toLowerCase()]}</Segment>
+        </Segment>
     )
 }
 

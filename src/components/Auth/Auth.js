@@ -62,6 +62,7 @@ const Auth = () => {
             <h2>{isLogin ? "Login" : "Signup"}</h2>
             <Form.Group widths="equal">
               <Form.Input
+                autoFocus='true'
                 label="Name"
                 placeholder="Name"
                 name="name"

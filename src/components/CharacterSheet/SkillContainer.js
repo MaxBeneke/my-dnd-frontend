@@ -14,7 +14,6 @@ const SkillContainer = () => {
         const skill = e.target.name
         if (character?.skills?.includes(skill)) {
             let updateArr = character.skills.filter(element => element !== skill)
-            console.log(updateArr)
             dispatch(overrideCharacter({...character, skills: updateArr}))
         } else {
             let updateArr = [...character.skills, skill]
