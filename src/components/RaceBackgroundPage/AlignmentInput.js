@@ -5,6 +5,7 @@ import AlignmentButton from './AlignmentButton'
 
 const AlignmentInput = () => {
     const [alignments, setAlignments] = useState([])
+    const [active, setActive] = useState('')
     const query = gql`
     {
         alignments{
@@ -28,6 +29,8 @@ const AlignmentInput = () => {
                 abbreviation={align.abbreviation}
                 desc={align.desc}
                 name={align.name}
+                active={active}
+                setActive={setActive}
             />
         )
     })

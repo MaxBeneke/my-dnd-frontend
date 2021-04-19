@@ -1,6 +1,6 @@
 import React from 'react'
 import CharacterContainer from './CharacterContainer'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid, Icon } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 import { overrideCharacter } from '../redux/characterSlice'
 import { useHistory } from 'react-router-dom'
@@ -15,10 +15,25 @@ const UserPage = () => {
     }
     
     return (
-        <div>
-            <CharacterContainer />
-            <Button floated="right" onClick={handleNewCharacter}>Create a New Character</Button>
-        </div>
+        <Grid columns={2} centered>
+            <Grid.Column>
+                <CharacterContainer />
+            </Grid.Column>
+            <Grid.Column textAlign='center'>
+                <Button
+                    animated='fade' 
+                    size='massive' 
+                    floated="right" 
+                    onClick={handleNewCharacter}
+                    style={{width: '10em', height: '10em', display: 'flex', justifyContent: 'center'}}
+                >
+                <Button.Content visible>Create a New Character</Button.Content>
+                <Button.Content hidden>
+                    <Icon name='plus' />
+                </Button.Content>
+                </Button>
+            </Grid.Column>
+        </Grid>
     )
 }
 

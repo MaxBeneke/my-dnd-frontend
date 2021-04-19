@@ -1,12 +1,23 @@
 import React from 'react'
-import { Item, Button } from 'semantic-ui-react'
+import { Item, Button, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { updateUser } from '../redux/userSlice'
 import { useDispatch } from 'react-redux'
+import human from '../../images/human.png'
+import elf from '../../images/elf.png'
+import dwarf from '../../images/dwarf.png'
+import halfling from '../../images/halfling.png'
+import halfElf from '../../images/halfElf.png'
+import halfOrc from '../../images/halfOrc.png'
+import gnome from '../../images/gnome.png'
+import dragonborn from '../../images/dragonborn.png'
+import tiefling from '../../images/tiefling.png'
 
 const CharacterCard = ({ level, character_class, race, subrace, name, id}) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const imageObj = {'Human': human, 'Halfling': halfling, 'Elf': elf, 'Dwarf': dwarf, 'Half-Elf': halfElf, 'Half-Orc': halfOrc, 'Gnome': gnome, 'Tiefling': tiefling, 'Dragonborn': dragonborn}
+
     const toCharacterSheet = (id) => {
         history.push(`/character/${id}`)
     }
@@ -20,17 +31,19 @@ const CharacterCard = ({ level, character_class, race, subrace, name, id}) => {
     }
 
     return ( 
-        <>
-        <Item onClick={()=> {toCharacterSheet(id)}}>
-         <Item.Image size='tiny' src='/images/wireframe/image.png' />
-            <Item.Content>
-            <Item.Header as='a'>{name}</Item.Header>
-            <Item.Meta>{subrace && subrace} {race} {character_class}</Item.Meta>
-            <Item.Extra>Level: {level}</Item.Extra>
-            </Item.Content>
-        </Item> 
-        <Button floated='right' onClick={()=> {handleDelete(id)}}>Delete</Button>    
-        </> 
+        <Segment raised size='large' style={{width: '40em'}}>
+            <Item onClick={()=> {toCharacterSheet(id)}}>
+            <Item.Image size='small'  src={imageObj[race]} />
+                <Item.Content>
+                    <Item.Header as='a'>{name}</Item.Header>
+                    <Item.Meta>{subrace && subrace} {race} {character_class}</Item.Meta>
+                        Level: {level}
+                    <Item.Extra>
+                        <Button onClick={()=> {handleDelete(id)}}>Delete</Button>    
+                    </Item.Extra>
+                </Item.Content>
+            </Item> 
+        </Segment>
     )
 }
 

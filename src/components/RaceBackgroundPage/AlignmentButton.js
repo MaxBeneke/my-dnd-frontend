@@ -3,19 +3,26 @@ import { Popup, Button, Card } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
 
-const AlignmentButton = ({ desc, abbreviation, name }) => {
+const AlignmentButton = ({ desc, abbreviation, name, active, setActive }) => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false)
+
+    const handleClick = (e) => {
+        console.log(e.target)
+        setActive(e.target.name)
+        dispatch(updateCharacter({alignment: name}))
+    }
     return (
         <Card>
         <Popup
             trigger={ <Button
+                name={abbreviation}
                 content={abbreviation}
                 onMouseEnter={() => setOpen(true)}
                 onMouseLeave={() => setOpen(false)}
-                onClick={() => dispatch(updateCharacter({alignment: name}))}
-                // active={clicked}
-                //figure out way to make one button stay clicked
+                onClick={handleClick}
+                toggle
+                active={active === abbreviation}
                 /> }
             content={desc}
             open={open}

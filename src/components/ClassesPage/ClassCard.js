@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Card, Dimmer, Image, Header, Button} from 'semantic-ui-react'
+import {Card, Dimmer, Image, Button} from 'semantic-ui-react'
 import { classImages } from '../../images/classImages'
 import barbarian from '../../images/barbarian.png'
 import bard from '../../images/bard.png'
