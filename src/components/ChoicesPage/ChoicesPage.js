@@ -97,7 +97,7 @@ const ChoicesPage = () => {
     history.push('./ability-score')
   }
   return (
-    <>
+    <div className='window'>
       <Grid>
           <Grid.Row height={slotInfo?.level?.spellcasting?.spells_known || slotInfo?.level?.spellcasting?.spell_slots_level_1 ? 8 : 16}>
               <Grid.Column width={8}>
@@ -128,7 +128,7 @@ const ChoicesPage = () => {
           
       </Grid>
       <Button floated='right' onClick={handleSubmit}>Next Page</Button>
-      </>
+      </div>
   )
 }
 

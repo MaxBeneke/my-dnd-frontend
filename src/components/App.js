@@ -33,6 +33,7 @@ function App() {
 
   
   return (
+    <div className="App">
     <Switch>
       <Route exact path="/login">
         <Auth />
@@ -56,6 +57,7 @@ function App() {
         <AbilityScorePage />
       </Route>
     </Switch>
+    </div>
       
   
   );

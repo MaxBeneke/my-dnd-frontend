@@ -16,6 +16,20 @@ code {
   cursor: pointer;
 }
 
+/* div.App{
+  background-image: url(./images/paperBackground.jpg);
+  height: 200vh;
+} */
+
+/* div#root{
+  background-image: url(./images/paperBackground.jpg);
+  height: 200vh;
+} */
+
 .fancy {
   font-family: 'Aclonica'
+}
+
+.beige {
+  background-color: bisque;
 }

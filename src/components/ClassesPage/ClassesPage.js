@@ -42,7 +42,7 @@ const ClassesPage = () => {
     return (
         <>
             <Segment basic textAlign="center">
-            <Header as='h3' style={{marginTop: '.5em', textAlign: 'center'}}>Choose your Class</Header>
+            <Header as='h1' style={{marginTop: '.5em', textAlign: 'center', fontFamily: 'Aclonica'}}>Choose your Class</Header>
             <Input onChange={handleChange} value={character.name} placeholder="Name your character" autoFocus/>
             </Segment>
             <Card.Group itemsPerRow={4} style={{maxHeight: '90vh', marginBottom: '10em', marginLeft: '9em'}}>

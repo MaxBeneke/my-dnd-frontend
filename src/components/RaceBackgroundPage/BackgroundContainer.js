@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Segment, Accordion } from 'semantic-ui-react'
+import { Segment, Accordion, Header } from 'semantic-ui-react'
 import BackgroundCard from './BackgroundCard'
 
 
@@ -27,8 +27,9 @@ const BackgroundContainer = () => {
     })
 
     return (
-        <Segment style={{overflow: 'auto', maxHeight: '55vh', maxWidth: '50vw'}}>
-            <Accordion styled>
+        <Segment color='red' style={{overflow: 'auto', height: '55vh', maxWidth: '50vw', backgroundColor: 'beige'}}>
+            <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Background</Header>
+            <Accordion style={{marginLeft: '2em', marginTop: '1em', backgroundColor: 'bisque'}} styled>
                 {allBackgrounds}
             </Accordion>
         </Segment >
