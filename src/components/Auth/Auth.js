@@ -9,6 +9,7 @@ const Auth = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [isLogin, setIsLogin] = useState(true);
+    const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
         password: "",
@@ -28,13 +29,24 @@ const Auth = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
         })
-            .then(r => r.json())
-            .then(user => {
-                if (!user) { alert('Incorrect Username or Password')
-            } else {
+            .then(r => {
+              return r.json().then(data => {
+                if (r.ok) {
+                  console.log(data)
+                  return data
+                } else {
+                  throw data
+                }
+              })
+            })
+            .then(data => {
+              const { user, token } = data
+              localStorage.setItem("token", token)
               dispatch(updateUser(user))
               history.push(`./user/${user.id}`)
-            }
+            })
+            .catch(error => {
+              setErrors(error.errors)
             })
         }
         else {
@@ -43,14 +55,23 @@ const Auth = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
         })
-            .then(r => r.json())
-            .then(user => {
-              if (!user) { 
-                alert('Signup failed')
-            } else {
-                dispatch(updateUser(user))
-                history.push(`./user/${user.id}`)
-            }
+            .then(r => {
+              return r.json().then(data => {
+                if (r.ok) {
+                  return data
+                } else {
+                  throw data
+                }
+              })
+            })
+            .then(data => {
+              const { user, token } = data
+              localStorage.setItem("token", token)
+              dispatch(updateUser(user))
+              history.push(`./user/${user.id}`)
+            })
+            .catch(error => {
+              setErrors(error.errors)
             })
         }
     }
@@ -80,6 +101,7 @@ const Auth = () => {
             </Form.Group>
             <Form.Button type="submit">{isLogin ? "Login" : "Signup"}</Form.Button>
           </Form>
+          {errors.map(error => <p style={{color: 'red'}} key={error}>{error}</p>)}
           <Button
             basic
             color="blue"

@@ -32,10 +32,10 @@ const CharacterCard = ({ level, character_class, race, subrace, name, id}) => {
 
     return ( 
         <Segment raised size='large' style={{width: '40em'}}>
-            <Item onClick={()=> {toCharacterSheet(id)}}>
-            <Item.Image size='small'  src={imageObj[race]} />
+            <Item>
+            <Item.Image size='small'  src={imageObj[race]} className='pointer' onClick={()=> {toCharacterSheet(id)}}/>
                 <Item.Content>
-                    <Item.Header as='a'>{name}</Item.Header>
+                    <Item.Header as='a' className='fancy'>{name}</Item.Header>
                     <Item.Meta>{subrace && subrace} {race} {character_class}</Item.Meta>
                         Level: {level}
                     <Item.Extra>

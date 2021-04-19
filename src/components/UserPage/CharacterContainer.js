@@ -5,7 +5,7 @@ import { Item } from 'semantic-ui-react'
 
 const CharacterContainer = () => {
     const user = useSelector((storeState) => storeState.user)
-    const allCharacters = user.characters.map(character => {
+    const allCharacters = user?.characters?.map(character => {
       return (  <CharacterCard key={character.name} 
         level={character.level}
         character_class={character.character_class}

@@ -12,4 +12,10 @@ code {
     monospace;
 }
 
+.pointer {
+  cursor: pointer;
+}
 
+.fancy {
+  font-family: 'Aclonica'
+}

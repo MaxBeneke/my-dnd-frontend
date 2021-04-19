@@ -66,7 +66,7 @@ const RaceContainer = () => {
             })
         }, [query])
     return (
-        <Segment style={{overflow: 'auto', maxHeight: '70vh', maxWidth: '50vw'}}>
+        <Segment style={{overflow: 'auto', maxHeight: '55vh', maxWidth: '50vw'}}>
             <Accordion styled>
                 {allRaces}
             </Accordion>

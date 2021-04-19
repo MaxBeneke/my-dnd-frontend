@@ -8,7 +8,6 @@ const AlignmentButton = ({ desc, abbreviation, name, active, setActive }) => {
     const [open, setOpen] = useState(false)
 
     const handleClick = (e) => {
-        console.log(e.target)
         setActive(e.target.name)
         dispatch(updateCharacter({alignment: name}))
     }
@@ -22,6 +21,7 @@ const AlignmentButton = ({ desc, abbreviation, name, active, setActive }) => {
                 onMouseLeave={() => setOpen(false)}
                 onClick={handleClick}
                 toggle
+                compact
                 active={active === abbreviation}
                 /> }
             content={desc}

@@ -18,6 +18,9 @@ export const userSlice = createSlice({
         },
         addCharacter: (state, action) => {
             state.characters.push(action.payload)
+        },
+        logoutUser: (state) => {
+            return {id: null, name: null, characters: []}
         }
     }
 })
@@ -25,4 +28,5 @@ export const userSlice = createSlice({
 export default userSlice.reducer;
 const updateUser = userSlice.actions.updateUser
 const addCharacter = userSlice.actions.addCharacter
-export { updateUser, addCharacter }
+const logoutUser = userSlice.actions.logoutUser
+export { updateUser, addCharacter, logoutUser }
