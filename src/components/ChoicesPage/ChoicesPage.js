@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Segment, Header } from 'semantic-ui-react'
 import { gql, request } from 'graphql-request'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
@@ -90,45 +90,57 @@ const ChoicesPage = () => {
       request('https://www.dnd5eapi.co/graphql', slotQuery, nameVariable).then((slots) => setSlotInfo(slots))
       request('https://www.dnd5eapi.co/graphql', cantripQuery, nameVariable).then((cantrips) => setCantripInfo(cantrips))
   },[classQuery, slotQuery, spellQuery])
-  
   const handleSubmit = () => {
     const savingThrows = classInfo.class.saving_throws.map(st => abilityRef[st.name])
     dispatch(updateCharacter({skills: [...character.skills, ...savingThrows]}))
     history.push('./ability-score')
   }
   return (
-    <div className='window'>
+    <Segment basic padded>
+      <Header as='h1' textAlign='center' style={{fontFamily: 'Aclonica'}}>Choices</Header>
       <Grid>
           <Grid.Row height={slotInfo?.level?.spellcasting?.spells_known || slotInfo?.level?.spellcasting?.spell_slots_level_1 ? 8 : 16}>
               <Grid.Column width={8}>
+              <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
+                <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Skills</Header>
                   <SkillChoices
-                      classInfo={classInfo}
+                    classInfo={classInfo}
                   />
+              </Segment>
               </Grid.Column>
               <Grid.Column width={8}>
+              <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
+                <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Equipment</Header>
                   <EquipmentChoices
                       classInfo={classInfo}
                   />
+                </Segment>
               </Grid.Column>
           </Grid.Row>
           <Grid.Row>
               <Grid.Column width={8}>
+              <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
+                <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Spells</Header>
                   <SpellChoices 
                       spellInfo={spellInfo}
                       slotInfo={slotInfo}
                   />
+                </Segment>
               </Grid.Column>
               <Grid.Column width={8}>
+              <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
+                  <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Cantrips</Header>
                   <CantripChoices
                       cantripInfo={cantripInfo}
                       slotInfo={slotInfo}
-                  />
+                      />
+                </Segment>
               </Grid.Column>
           </Grid.Row>
           
       </Grid>
-      <Button floated='right' onClick={handleSubmit}>Next Page</Button>
-      </div>
+      <Button onClick={handleSubmit} color='red' style={{marginLeft: '46.25em', marginTop: '.5em'}}>Next Page</Button>
+      </Segment>
   )
 }
 

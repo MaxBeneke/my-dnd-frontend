@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Header } from 'semantic-ui-react'
 import { overrideCharacter } from '../redux/characterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -42,8 +42,8 @@ const SkillChoices = ({ classInfo }) => {
     })
     
     return (
-        <Form>
-            Choose {skillObj?.choose} from:
+        <Form style={{marginLeft: '20em'}}>
+            <Header as='h4'>Choose {skillObj?.choose} from: </Header>
             <Form.Group grouped>
                 {skillChoices}
             </Form.Group>

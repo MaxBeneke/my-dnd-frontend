@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateUser } from '../redux/userSlice'
 import { useHistory } from 'react-router-dom'
 import { overrideCharacter } from '../redux/characterSlice'
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Segment } from 'semantic-ui-react'
 import CharacterInfoCard from './CharacterInfoCard'
 import HPContainer from './HPContainer'
 import AbilityScoreContainer from './AbilityScoreContainer'
@@ -38,7 +38,7 @@ const CharacterSheet = () => {
     }
 
     return (
-        <>
+        <Segment padded='very' basic>
         <Grid>
             <Grid.Row height={4}>
                 <Grid.Column width={5}>
@@ -130,7 +130,7 @@ const CharacterSheet = () => {
         <Button.Or/>
         <Button positive onClick={() => {history.push(`/user/${user.id}`)}}> Revert Changes </Button>
         </Button.Group>
-        </>
+        </Segment>
     )
 }
 

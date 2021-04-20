@@ -88,7 +88,12 @@ const RaceBackgroundPage = () => {
                </Grid.Column>
            </Grid.Row>
        </Grid>
-       <Button onClick={handleSubmit} content='Submit' floated='right' />
+       <Button onClick={handleSubmit} 
+       content='Submit' 
+       floated='right'
+       color='red' 
+       style={{marginRight: '3em'}} 
+       />
        <Modal
             size='tiny'
             open={openModal}

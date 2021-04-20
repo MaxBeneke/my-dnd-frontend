@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Popup, Form } from 'semantic-ui-react'
+import { Popup, Form, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { overrideCharacter } from '../redux/characterSlice'
 
@@ -50,11 +50,11 @@ const CantripChoices = ({ cantripInfo, slotInfo }) => {
     })
     
     if (!slotInfo?.level?.spellcasting?.spells_known && !slotInfo?.level?.spellcasting?.spell_slots_level_1) {
-        return null
+        return <Header textAlign='center' as='h3'>None to choose from</Header>
     } else 
     return (
-        <Form>
-        Choose {chooseFrom} from:
+        <Form style={{marginLeft: '20em'}}>
+        <Header as='h4'>Choose {chooseFrom} from: </Header>
         <Form.Group grouped>
             {cantripChoices}
         </Form.Group>

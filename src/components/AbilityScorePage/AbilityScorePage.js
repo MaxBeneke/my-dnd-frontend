@@ -99,8 +99,8 @@ const AbilityScorePage = () => {
         <Grid columns={6}>
          {scoreMap}
         </Grid>
-        <Button onClick={handleSubmit}>Create my Character!</Button>
-        {bigCounter === 0 && <Button onClick={handleAC}>Add my Bonuses</Button>}
+        <Button color='red' onClick={handleSubmit}>Create my Character!</Button>
+        {bigCounter === 0 && <Button color='red' disabled={armorCheck} onClick={handleAC}>{armorCheck ? 'Bonuses Added' : 'Add my Bonuses'}</Button>}
         <Header as='h5'>{character.race} bonuses:</Header>
         <List>
             {bonusMap}

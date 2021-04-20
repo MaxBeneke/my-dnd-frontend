@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Popup, Form } from 'semantic-ui-react'
+import { Popup, Form, Header } from 'semantic-ui-react'
 import { overrideCharacter } from '../redux/characterSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -52,11 +52,11 @@ const SpellChoices = ( spellInfo ) => {
     
     
     if (!spellInfo?.slotInfo?.level?.spellcasting?.spells_known && !spellInfo?.slotInfo?.level?.spellcasting?.spell_slots_level_1) {
-        return null
+        return <Header textAlign='center' as='h3'>None to choose from</Header>
     } else 
     return (
-        <Form>
-        Choose {chooseFrom} from:
+        <Form style={{marginLeft: '20em'}}>
+        <Header as='h4'>Choose {chooseFrom} from: </Header>
         <Form.Group grouped>
             {spellChoices}
         </Form.Group>

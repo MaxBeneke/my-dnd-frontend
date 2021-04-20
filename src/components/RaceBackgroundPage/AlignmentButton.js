@@ -15,6 +15,7 @@ const AlignmentButton = ({ desc, abbreviation, name, active, setActive }) => {
         <Card>
         <Popup
             trigger={ <Button
+                color='red'
                 name={abbreviation}
                 content={abbreviation}
                 onMouseEnter={() => setOpen(true)}

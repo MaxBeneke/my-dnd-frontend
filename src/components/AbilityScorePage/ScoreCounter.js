@@ -49,11 +49,11 @@ const ScoreCounter = ({ fullName, desc, bigCounter, addBigCounter, subtractBigCo
             </Header>
 
         <div>
-        <Button attached='left' onClick={handleSubtract}> <Icon name='minus'/> </Button>
-        <Button attached='right' onClick={handleAdd}> <Icon name='plus'/> </Button>
+        <Button color='grey'  attached='left' onClick={handleSubtract}> <Icon name='minus'/> </Button>
+        <Button color='black' attached='right' onClick={handleAdd}> <Icon name='plus'/> </Button>
         </div>
         
-        <Segment textAlign='center' basic size='huge' compact>{character[fullName.toLowerCase()]}</Segment>
+        <Segment textAlign='center' basic compact style={{fontSize: '3em'}}>{character[fullName.toLowerCase()]}</Segment>
         </Segment>
     )
 }

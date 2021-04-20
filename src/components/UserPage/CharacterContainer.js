@@ -1,7 +1,7 @@
 import React from 'react'
 import CharacterCard from './CharacterCard'
 import { useSelector } from 'react-redux'
-import { Item } from 'semantic-ui-react'
+import { Item, Segment } from 'semantic-ui-react'
 
 const CharacterContainer = () => {
     const user = useSelector((storeState) => storeState.user)
@@ -17,9 +17,11 @@ const CharacterContainer = () => {
       )
     })
     return (
+      <Segment basic style={{overflow: 'auto', maxHeight: '90vh'}}>
         <Item.Group>
             {allCharacters}
         </Item.Group>
+      </Segment>
     )
 }
 
