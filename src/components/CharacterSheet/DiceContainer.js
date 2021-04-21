@@ -1,22 +1,11 @@
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
-import SpeedCard from './SpeedCard'
 import HitDiceCard from './HitDiceCard'
 import RollDiceCard from './RollDiceCard'
-import HPCard from './HPCard'
 
-
-const HPContainer = () => {
+const DiceContainer = () => {
     return (
         <Grid columns={2} divided>
-            <Grid.Row>
-                <Grid.Column>
-                    <HPCard />
-                </Grid.Column>
-                <Grid.Column>
-                    <SpeedCard />
-                </Grid.Column>
-            </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
                     <HitDiceCard />
@@ -29,4 +18,4 @@ const HPContainer = () => {
     )
 }
 
-export default HPContainer
+export default DiceContainer

@@ -10,6 +10,7 @@ const RollDiceCard = () => {
         { key: 8, text: 'd8', value: 8 },
         { key: 10, text: 'd10', value: 10 },
         { key: 12, text: 'd12', value: 12 },
+        { key: 20, text: 'd20', value: 20},
         { key: 100, text: 'd100', value: 100 },   
     ]
 

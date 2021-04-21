@@ -59,3 +59,26 @@ export const classImages = [
     hit_die: 6,
     color: 'dark blue'}
 ]
+
+export const helpObject = {
+    'RaceBackground': "This page is where you choose your Race, Background, Personality Traits, as well as Alignment. Your race gives you bonuses to your core abilities as well as some extra features that are distinct to that race. Your background helps determine a bit about how to play your character and also gives you proficiency in two skills. The personality and alignment fields are yours to fill out how you please! Add as much or as little detail as possible, but it's recommended to be thorough enough to give you a baseline to roleplay with.",
+
+    'Choices': "This page is where you choose bonus proficiencies, equipment, and spells all provided by your class! Some classes do not cast spells until later levels, so those options will not be available until you level up.",
+
+    'AbilityScores': "This page is where you allocate ability score points! You have 27 points to dole out between all 6 of the major abilities. Each point added will reduce the point pool by 1, but if you want to increase your score to 14 or 15, you must spend 2 of the points in your pool. When you're done, you'll be able to add the extra bonuses you get from your race and complete your character."
+}
+
+export const autoComplete = {
+    "Barbarian": {strength: 15, dexterity: 14, constitution: 14, intelligence: 8, wisdom: 12, charisma: 8},
+    "Bard": {strength: 10, dexterity: 14, constitution: 11, intelligence: 10, wisdom: 12, charisma: 15},
+    "Cleric": {strength: 13, dexterity: 12, constitution: 13, intelligence: 8, wisdom: 15, charisma: 12},
+    "Druid": {strength: 12, dexterity: 12, constitution: 14, intelligence: 9, wisdom: 15, charisma: 10},
+    "Fighter": {strength: 15, dexterity: 14, constitution: 14, intelligence: 8, wisdom: 12, charisma: 8},
+    "Monk": {strength: 8, dexterity: 15, constitution: 14, intelligence: 10, wisdom: 14, charisma: 10},
+    "Paladin": {strength: 15, dexterity: 10, constitution: 13, intelligence: 10, wisdom: 10, charisma: 14},
+    "Ranger": {strength: 11, dexterity: 15, constitution: 12, intelligence: 10, wisdom: 14, charisma: 10},
+    "Rogue": {strength: 8, dexterity: 15, constitution: 12, intelligence: 13, wisdom: 12, charisma: 13},
+    "Sorcerer": {strength: 8, dexterity: 14, constitution: 14, intelligence: 8, wisdom: 12, charisma: 15},
+    "Warlock": {strength: 8, dexterity: 12, constitution: 14, intelligence: 11, wisdom: 12, charisma: 15},
+    "Wizard": {strength: 8, dexterity: 14, constitution: 14, intelligence: 15, wisdom: 10, charisma: 10},
+}

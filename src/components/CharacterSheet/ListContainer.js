@@ -36,7 +36,7 @@ const ListContainer = ({ listVar }) => {
         <Item.Content>
           <Item.Header>
             {listVar?.charAt(0)?.toUpperCase() + listVar.slice(1)} 
-            {isEdit && <Button size='small' compact basic color='blue' onClick={()=> setIsEdit(false)}>Accept Changes</Button>}
+            {isEdit && <Button size='small' compact basic color='blue' floated='right' onClick={()=> setIsEdit(false)}>Accept Changes</Button>}
           </Item.Header>
           <Item.Meta>{!isEdit && 'Double Click to Edit'}</Item.Meta>
             {isEdit ? (

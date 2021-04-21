@@ -22,7 +22,7 @@ const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencie
     const enduranceDesc = "When you are reduced to 0 Hit Points but not killed outright, you can drop to 1 hit point instead."
     
     useEffect(() => {
-        if (selectedRace != -1) {
+        if (selectedRace !== -1) {
             request('https://www.dnd5eapi.co/graphql', query, {name: selectedRace}).then(data => setTraitDesc(data.traits))
         }
     }, [selectedRace, query])

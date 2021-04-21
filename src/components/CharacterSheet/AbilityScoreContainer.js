@@ -5,25 +5,25 @@ import AbilityScoreCard from './AbilityScoreCard'
 const AbilityScoreContainer = () => {
    
     return (
-        <Grid rows={6}>
-            <Grid.Row>
+        <Grid columns={6}>
+            <Grid.Column>
                 <AbilityScoreCard key="strength" ability="strength" />
-            </Grid.Row>
-            <Grid.Row>
+            </Grid.Column>
+            <Grid.Column>
                 <AbilityScoreCard key="dexterity" ability="dexterity" />
-            </Grid.Row>
-            <Grid.Row>
+            </Grid.Column>
+            <Grid.Column>
                 <AbilityScoreCard key="constitution" ability="constitution" />
-            </Grid.Row>
-            <Grid.Row>
+            </Grid.Column>
+            <Grid.Column>
                 <AbilityScoreCard key="intelligence" ability="intelligence" />
-            </Grid.Row>
-            <Grid.Row>
+            </Grid.Column>
+            <Grid.Column>
                 <AbilityScoreCard key="wisdom" ability="wisdom" />
-            </Grid.Row>
-            <Grid.Row>
+            </Grid.Column>
+            <Grid.Column>
                 <AbilityScoreCard key="charisma" ability="charisma" />
-            </Grid.Row>
+            </Grid.Column>
         </Grid>
     )
 }

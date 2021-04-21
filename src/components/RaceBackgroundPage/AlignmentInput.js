@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Header } from 'semantic-ui-react'
 import { request, gql } from 'graphql-request'
 import AlignmentButton from './AlignmentButton'
 
@@ -36,9 +36,12 @@ const AlignmentInput = () => {
     })
 
     return (
-        <Card.Group itemsPerRow={3} >
-            {allAlignments}
-        </Card.Group>
+        <>
+            <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Alignment</Header>
+            <Card.Group itemsPerRow={3} style={{height: '6em'}} >
+                {allAlignments}
+            </Card.Group>
+        </>
     )
 }
 

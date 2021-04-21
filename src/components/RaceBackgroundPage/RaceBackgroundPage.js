@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Button, Modal, Header } from 'semantic-ui-react'
+import { Grid, Button, Modal, Header, Segment } from 'semantic-ui-react'
 import RaceContainer from './RaceContainer'
 import BackgroundContainer from './BackgroundContainer'
 import PersonalityInput from './PersonalityInput'
@@ -8,12 +8,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
 import { useHistory } from 'react-router-dom'
 import { request, gql } from 'graphql-request'
+import { helpObject } from '../../images/classImages'
 
 const RaceBackgroundPage = () => {
     const history = useHistory();
     const character = useSelector((storeState) => storeState.character)
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false)
+    const [openHelp, setOpenHelp] = useState(false)
 
     const query = gql`
     query getFeature($name: String) {
@@ -42,9 +44,17 @@ const RaceBackgroundPage = () => {
             setOpenModal(true)
         }
     }
+
     return (
         <>
-        <Header as='h1' textAlign='center' style={{padding: '.5em', fontFamily: 'Aclonica'}}>Choose your Race and Background</Header>
+        <Segment basic>
+        <Header as='h1' textAlign='center' style={{padding: '.5em', marginLeft: '3em' ,fontFamily: 'Aclonica'}}>
+            Choose your Race and Background
+            <Button color='purple' floated='right' onClick={() => setOpenHelp(true)}>
+                Help
+            </Button>
+         </Header>
+        </Segment>
        <Grid padded >
            <Grid.Row height={8}>
                <Grid.Column width={8}>
@@ -54,7 +64,7 @@ const RaceBackgroundPage = () => {
                    <BackgroundContainer />
                </Grid.Column>
            </Grid.Row>
-           <Grid.Row height={8}>
+           <Grid.Row height={6}>
                <Grid.Column width={3} verticalAlign='middle'>
                    <PersonalityInput
                    key="Personality"
@@ -89,12 +99,13 @@ const RaceBackgroundPage = () => {
            </Grid.Row>
        </Grid>
        <Button onClick={handleSubmit} 
-       content='Submit' 
+       content='Next Page' 
        floated='right'
        color='red' 
-       style={{marginRight: '3em'}} 
+       style={{marginRight: '3em', marginTop: '3em'}} 
        />
        <Modal
+            name='Incomplete'
             size='tiny'
             open={openModal}
             onClose={() => setOpenModal(false)}
@@ -102,6 +113,17 @@ const RaceBackgroundPage = () => {
             <Modal.Header>Incomplete</Modal.Header>
             <Modal.Content>
             <p>Please fill out every field!</p>
+            </Modal.Content>
+        </Modal>
+        <Modal
+            name='Help'
+            size='small'
+            open={openHelp}
+            onClose={() => setOpenHelp(false)}
+        >
+            <Modal.Header>Race and Background</Modal.Header>
+            <Modal.Content>
+            <p>{helpObject['RaceBackground']}</p>
             </Modal.Content>
         </Modal>
        </>

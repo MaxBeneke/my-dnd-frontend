@@ -29,7 +29,7 @@ function App() {
           history.push('/login')
         }
       })
-  }, [])
+  }, [dispatch, history])
 
   
   return (

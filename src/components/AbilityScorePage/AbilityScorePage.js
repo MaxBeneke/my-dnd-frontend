@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { request, gql } from 'graphql-request'
 import ScoreCounter from './ScoreCounter'
-import { Button, Grid, Segment, Header, List } from 'semantic-ui-react'
+import { Button, Grid, Segment, Header, List, Modal } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addCharacter } from '../redux/userSlice'
 import { updateCharacter } from '../redux/characterSlice'
+import { autoComplete } from '../../images/classImages'
+import { helpObject } from '../../images/classImages'
 
 const AbilityScorePage = () => {
     const dispatch = useDispatch();
@@ -14,6 +16,8 @@ const AbilityScorePage = () => {
     const [abilityScores, setAbilityScores] = useState([])
     const [bigCounter, setBigCounter] = useState(27)
     const [armorCheck, setArmorCheck] = useState(false)
+    const [completeModal, setCompleteModal] = useState(false)
+    const [openHelp, setOpenHelp] = useState(false)
     const query = gql`
     {
         abilityScores{
@@ -54,9 +58,9 @@ const AbilityScorePage = () => {
     }
 
     const handleSubmit = () => {
-        if (bigCounter > 0) {
+        if (bigCounter > 0 && !completeModal) {
             alert('You still have more points to assign!')
-        } else if (!armorCheck) {
+        } else if (!armorCheck && !completeModal) {
             alert('You have to add your race bonuses')
         } else {
             fetch('http://localhost:3000/characters', {
@@ -70,6 +74,13 @@ const AbilityScorePage = () => {
                 history.push(`./character/${newCharacter.id}`)
             })
         }
+    }
+
+    const handleAutoComplete = () => {
+        const updateObj = autoComplete[character?.character_class]
+        dispatch(updateCharacter(updateObj))
+        handleAC()
+        setCompleteModal(true)
     }
 
     const scoreMap = abilityScores.map(score => {
@@ -95,7 +106,11 @@ const AbilityScorePage = () => {
 
     return (
         <Segment textAlign="center" basic>
-            <Header as='h1'>Points Left: {bigCounter}</Header>
+            <Segment basic>
+                <Header as='h1'>Points Left: {bigCounter}</Header>
+                <Button color='red' style={{marginLeft: '5.5em'}} onClick={handleAutoComplete}>Auto-Complete</Button>
+                <Button color='purple' floated='right' onClick={() => setOpenHelp(true)}>Help</Button>
+            </Segment>
         <Grid columns={6}>
          {scoreMap}
         </Grid>
@@ -105,6 +120,26 @@ const AbilityScorePage = () => {
         <List>
             {bonusMap}
         </List>
+        <Modal
+            size='tiny'
+            open={completeModal}
+        >
+            <Modal.Header>Auto-Complete</Modal.Header>
+            <Modal.Content>
+            <p>Ability Scores preset for {character.character_class}</p>
+            <Button color='red' onClick={handleSubmit}>Create my Character!</Button>
+            </Modal.Content>
+        </Modal>
+        <Modal
+            size='small'
+            open={openHelp}
+            onClose={() => setOpenHelp(false)}
+        >
+            <Modal.Header>Ability Scores</Modal.Header>
+            <Modal.Content>
+            <p>{helpObject['AbilityScores']}</p>
+            </Modal.Content>
+        </Modal>
         </Segment>
     )
 }

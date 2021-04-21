@@ -4,7 +4,7 @@ import { overrideCharacter } from '../redux/characterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 
-const SkillChoices = ({ classInfo }) => {
+const SkillChoices = ({ classInfo, handleIncomplete }) => {
     //set counter on higher level component to save it to redux??
     const character = useSelector((storeState) => storeState.character);
     const dispatch = useDispatch();
@@ -20,9 +20,9 @@ const SkillChoices = ({ classInfo }) => {
             let reduxArr = character.skills.filter(skill => skill !== skillName)
             dispatch(overrideCharacter({...character, skills: reduxArr}))
         } else if (counter.length + 1 > parseInt(skillObj?.choose)) {
-            alert(`You may only choose ${skillObj?.choose}`)
+            handleIncomplete(`You may only choose ${skillObj?.choose}`)
         } else if (character.skills.includes(skillName)) {
-            alert('You already have this skill from your Race or Background')
+            handleIncomplete('You already have this skill from your Race or Background')
         } else {
             setCounter([...counter, number])
             let reduxArr = [...character.skills, skillName]

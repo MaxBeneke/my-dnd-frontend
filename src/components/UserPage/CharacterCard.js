@@ -39,7 +39,7 @@ const CharacterCard = ({ level, character_class, race, subrace, name, id}) => {
                     <Item.Meta>{subrace && subrace} {race} {character_class}</Item.Meta>
                         Level: {level}
                     <Item.Extra>
-                        <Button onClick={()=> {handleDelete(id)}}>Delete</Button>    
+                        <Button color='red' onClick={()=> {handleDelete(id)}}>Delete</Button>    
                     </Item.Extra>
                 </Item.Content>
             </Item> 

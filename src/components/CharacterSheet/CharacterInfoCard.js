@@ -10,7 +10,7 @@ import gnome from '../../images/gnome.png'
 import dragonborn from '../../images/dragonborn.png'
 import tiefling from '../../images/tiefling.png'
 
-const CharacterInfoCard = ({ name, level, background, character_class, race }) => {
+const CharacterInfoCard = ({ name, level, background, character_class, race, alignment }) => {
     const imageObj = {'Human': human, 'Halfling': halfling, 'Elf': elf, 'Dwarf': dwarf, 'Half-Elf': halfElf, 'Half-Orc': halfOrc, 'Gnome': gnome, 'Tiefling': tiefling, 'Dragonborn': dragonborn}
 
     return (
@@ -18,13 +18,14 @@ const CharacterInfoCard = ({ name, level, background, character_class, race }) =
            <Item.Content verticalAlign='middle'>
                <Item.Image size='small' 
                floated='right' 
-               style={{marginRight: '4em'}} 
+               style={{marginRight: '1em'}} 
                src={imageObj[race]} 
             />
            <Header as='h2' style={{fontFamily:'Aclonica'}}>{name}</Header>
                 <List>
                     <li>Level: {level}</li>    
                     <li>{race} {character_class}</li>
+                    <li>{alignment}</li>
                     <li>Background: {background}</li>
                 </List>
             </Item.Content> 

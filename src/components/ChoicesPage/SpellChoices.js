@@ -3,12 +3,12 @@ import { Popup, Form, Header } from 'semantic-ui-react'
 import { overrideCharacter } from '../redux/characterSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
-const SpellChoices = ( spellInfo ) => {
+const SpellChoices = ( {spellInfo, handleIncomplete, slotInfo} ) => {
     const character = useSelector((storeState) => storeState.character)
     const dispatch = useDispatch();
     const [counter, setCounter] = useState([])
-    const chooseFrom = spellInfo?.slotInfo?.level?.spellcasting?.spells_known || spellInfo?.slotInfo?.level?.spellcasting?.spell_slots_level_1
-    
+    const chooseFrom = slotInfo?.level?.spellcasting?.spells_known || slotInfo?.level?.spellcasting?.spell_slots_level_1
+
     const handleClick = (e) => {
         const number = parseInt(e.target.name)
         const spellName = e.target.value
@@ -18,7 +18,7 @@ const SpellChoices = ( spellInfo ) => {
             let reduxArr = character?.spells?.filter(spell => spell !== spellName)
             dispatch(overrideCharacter({...character, spells: reduxArr}))
         } else if (counter.length + 1 > chooseFrom) {
-            alert(`You may only choose ${chooseFrom}`)
+            handleIncomplete(`You may only choose ${chooseFrom}`)
         } else {
             setCounter([...counter, number])
             if (character.spells) {
@@ -30,7 +30,7 @@ const SpellChoices = ( spellInfo ) => {
         }
     }
     
-    const spellChoices = spellInfo?.spellInfo?.spells?.map((spellObj, index) => {
+    const spellChoices = spellInfo?.spells?.map((spellObj, index) => {
        return <Popup
                 trigger={
                     <Form.Field 
@@ -51,7 +51,7 @@ const SpellChoices = ( spellInfo ) => {
     
     
     
-    if (!spellInfo?.slotInfo?.level?.spellcasting?.spells_known && !spellInfo?.slotInfo?.level?.spellcasting?.spell_slots_level_1) {
+    if (!slotInfo?.level?.spellcasting?.spells_known && !slotInfo?.level?.spellcasting?.spell_slots_level_1) {
         return <Header textAlign='center' as='h3'>None to choose from</Header>
     } else 
     return (

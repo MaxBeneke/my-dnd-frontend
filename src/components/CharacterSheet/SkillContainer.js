@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Header } from 'semantic-ui-react'
 import { overrideCharacter } from '../redux/characterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -47,6 +47,8 @@ const SkillContainer = () => {
 
     return (
         <Form>
+            <Header as='h2'>Skills</Header>
+            <Header as='h5'>Prof. Bonus: +2</Header>
             <Form.Group grouped>
                 {savingThrowDisplay}
                 {skillDisplay}

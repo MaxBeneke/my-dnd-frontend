@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Button, Segment, Header } from 'semantic-ui-react'
+import { Grid, Button, Segment, Header, Modal } from 'semantic-ui-react'
 import { gql, request } from 'graphql-request'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
@@ -8,6 +8,7 @@ import SkillChoices from './SkillChoices'
 import EquipmentChoices from './EquipmentChoices'
 import SpellChoices from './SpellChoices'
 import { useHistory } from 'react-router-dom'
+import { helpObject } from '../../images/classImages'
 
 const ChoicesPage = () => {
   const history = useHistory();
@@ -16,8 +17,16 @@ const ChoicesPage = () => {
   const [classInfo, setClassInfo] = useState([])
   const [slotInfo, setSlotInfo] = useState([])
   const [cantripInfo, setCantripInfo] = useState([])
+  const [openHelp, setOpenHelp] = useState(false)
+  const [openIncomplete, setOpenIncomplete] = useState(false)
+  const [incompleteContent, setIncompleteContent] = useState('')
 
-  const abilityRef = {"STR": "strength", "DEX": "dexterity", "CON": "constitution", "INT": "intelligence", "WIS": "wisdom", "CHA": "charisma"}
+  const handleIncomplete = (input) => {
+    setIncompleteContent(input)
+    setOpenIncomplete(true)
+  }
+
+  const abilityRef = {"STR": "strength", "DEX": "dexterity", "CON": "constitution", "INT": "intelligence", "WIS": "wisdom", "CHA": "charisma"} 
 
   const character = useSelector((storeState) => storeState.character)
 
@@ -97,13 +106,20 @@ const ChoicesPage = () => {
   }
   return (
     <Segment basic padded>
-      <Header as='h1' textAlign='center' style={{fontFamily: 'Aclonica'}}>Choices</Header>
+      <Header as='h1' textAlign='center' style={{fontFamily: 'Aclonica', marginLeft: '2.5em'}}>
+        Choices
+        <Button color='purple' floated='right' onClick={() => setOpenHelp(true)}>
+          Help
+        </Button>
+      </Header>
+
       <Grid>
           <Grid.Row height={slotInfo?.level?.spellcasting?.spells_known || slotInfo?.level?.spellcasting?.spell_slots_level_1 ? 8 : 16}>
               <Grid.Column width={8}>
               <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
                 <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Skills</Header>
                   <SkillChoices
+                    handleIncomplete={handleIncomplete}
                     classInfo={classInfo}
                   />
               </Segment>
@@ -122,6 +138,7 @@ const ChoicesPage = () => {
               <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
                 <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Spells</Header>
                   <SpellChoices 
+                      handleIncomplete={handleIncomplete}
                       spellInfo={spellInfo}
                       slotInfo={slotInfo}
                   />
@@ -131,6 +148,7 @@ const ChoicesPage = () => {
               <Segment style={{overflow: 'auto', height: '40vh', backgroundColor: 'beige'}}>
                   <Header as='h2' textAlign='center' style={{fontFamily: 'Aclonica'}}>Cantrips</Header>
                   <CantripChoices
+                      handleIncomplete={handleIncomplete}
                       cantripInfo={cantripInfo}
                       slotInfo={slotInfo}
                       />
@@ -140,6 +158,28 @@ const ChoicesPage = () => {
           
       </Grid>
       <Button onClick={handleSubmit} color='red' style={{marginLeft: '46.25em', marginTop: '.5em'}}>Next Page</Button>
+      <Modal
+            name='Help'
+            size='small'
+            open={openHelp}
+            onClose={() => setOpenHelp(false)}
+        >
+            <Modal.Header>Choices</Modal.Header>
+            <Modal.Content>
+            <p>{helpObject['Choices']}</p>
+            </Modal.Content>
+        </Modal>
+        <Modal
+            name='Incomplete'
+            size='small'
+            open={openIncomplete}
+            onClose={() => setOpenIncomplete(false)}
+        >
+            <Modal.Header>Choices</Modal.Header>
+            <Modal.Content>
+            <p>{incompleteContent}</p>
+            </Modal.Content>
+        </Modal>
       </Segment>
   )
 }

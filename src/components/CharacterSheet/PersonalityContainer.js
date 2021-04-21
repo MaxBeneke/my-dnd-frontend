@@ -6,7 +6,7 @@ const PersonalityContainer = () => {
     
     return (
     
-    <Segment style={{overflow: 'auto', maxHeight: '40vh'}}>
+    <Segment>
     <Item.Group>
     
     <PersonalityEdit name="Personality"/>

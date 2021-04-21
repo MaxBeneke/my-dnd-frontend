@@ -6,11 +6,12 @@ import { useHistory } from 'react-router-dom'
 import { overrideCharacter } from '../redux/characterSlice'
 import { Grid, Button, Segment } from 'semantic-ui-react'
 import CharacterInfoCard from './CharacterInfoCard'
-import HPContainer from './HPContainer'
+import DiceContainer from './DiceContainer'
 import AbilityScoreContainer from './AbilityScoreContainer'
 import SkillContainer from './SkillContainer'
 import PersonalityContainer from './PersonalityContainer'
 import ListContainer from './ListContainer'
+import ACSpeedContainer from './ACSpeedContainer'
 
 const CharacterSheet = () => {
     const history = useHistory();
@@ -38,10 +39,10 @@ const CharacterSheet = () => {
     }
 
     return (
-        <Segment padded='very' basic>
+        <Segment padded basic>
         <Grid>
-            <Grid.Row height={4}>
-                <Grid.Column width={5}>
+            <Grid.Row height={3}>
+                <Grid.Column width={4}>
                     <CharacterInfoCard
                         name={character?.name}
                         level={character?.level}
@@ -49,87 +50,80 @@ const CharacterSheet = () => {
                         background={character?.background}
                         character_class={character?.character_class}
                         character={character}
+                        alignment={character.alignment}
                     />
                 </Grid.Column>
-                <Grid.Column width={5}>
-                    <HPContainer />   
+                <Grid.Column width={12}>
+                <AbilityScoreContainer
+                    strength={character?.strength}
+                    dexterity={character?.dexterity}
+                    constitution={character?.constitution}
+                    intelligence={character?.intelligence}
+                    wisdom={character?.wisdom}
+                    charisma={character?.charisma}
+                    character={character}
+                />
                 </Grid.Column>
-                <Grid.Column width={6}>
-                    <PersonalityContainer 
-                        alignment={character?.alignment}
-                        personality={character?.personality}
-                        ideals={character?.ideals}
-                        bonds={character?.bonds}
-                        flaws={character?.flaws}
-                        character={character}
-                    />
-                </Grid.Column>
+               
+              
             </Grid.Row>
-            <Grid.Column width={2}>
-                <Grid.Row height={12}>
-                    <AbilityScoreContainer
-                        strength={character?.strength}
-                        dexterity={character?.dexterity}
-                        constitution={character?.constitution}
-                        intelligence={character?.intelligence}
-                        wisdom={character?.wisdom}
-                        charisma={character?.charisma}
-                        character={character}
-                    />
-                </Grid.Row>
+            <Grid.Row height={6}>
+            <Grid.Column width={2} style={{overflow: 'auto', maxHeight: '47vh'}}>
+                <SkillContainer 
+                skills={character?.skills}
+                character={character}
+                />
             </Grid.Column>
-            <Grid.Column width={3}>
-                <Grid.Row height={12}>
-                    <SkillContainer 
-                    skills={character?.skills}
+            <Grid.Column width={4} style={{overflow: 'auto', maxHeight: '47vh'}}>
+                <ListContainer
+                    key='equipment'
+                    listVar='equipment'
+                    />
+                <ListContainer
+                    key='features'
+                    listVar='features'
+                    />
+                <ListContainer
+                    key='traits'
+                    listVar='traits'
+                    />
+                <ListContainer
+                    key='languages'
+                    listVar='languages'
+                    />
+            </Grid.Column>
+            <Grid.Column width={4} style={{overflow: 'auto', maxHeight: '47vh'}}>
+                <ACSpeedContainer />
+                <ListContainer
+                    key='cantrips'
+                    listVar='cantrips'
+                    />
+                <ListContainer
+                    key='spells'
+                    listVar='spells'
+                    />
+            </Grid.Column>
+            <Grid.Column width={6} style={{overflow: 'auto', maxHeight: '47vh'}}>
+                <DiceContainer />   
+                <PersonalityContainer 
+                    alignment={character?.alignment}
+                    personality={character?.personality}
+                    ideals={character?.ideals}
+                    bonds={character?.bonds}
+                    flaws={character?.flaws}
                     character={character}
                     />
-                </Grid.Row>
-            </Grid.Column>
-            <Grid.Column width={5}>
-                <Grid.Row height={6}>
-                    <ListContainer
-                        key='features'
-                        listVar='features'
-                    />
-                </Grid.Row>
-                <Grid.Row height={6}>
-                    <ListContainer
-                        key='traits'
-                        listVar='traits'
-                    />
-                    <ListContainer
-                        key='languages'
-                        listVar='languages'
-                    />
-                </Grid.Row>
-            </Grid.Column>
-            <Grid.Column width={6}>
-                <Grid.Row height={6}>
-                    <ListContainer
-                        key='equipment'
-                        listVar='equipment'
-                    />
-                </Grid.Row>
-                <Grid.Row height={6}>
-                    <ListContainer
-                        key='cantrips'
-                        listVar='cantrips'
-                    />
-                    <ListContainer
-                        key='spells'
-                        listVar='spells'
-                    />
-                </Grid.Row>
-            </Grid.Column>
-            
 
+            </Grid.Column>
+            </Grid.Row>
         </Grid>
-        <Button.Group>
-        <Button onClick={handleSaveChange}> Save Changes </Button>
-        <Button.Or/>
-        <Button positive onClick={() => {history.push(`/user/${user.id}`)}}> Revert Changes </Button>
-        </Button.Group>
+        <Segment basic textAlign='center'>
+            <Button.Group>
+            <Button color='red' onClick={() => {history.push(`/user/${user.id}`)}}> Revert Changes </Button>
+            <Button.Or/>
+            <Button color='blue' onClick={handleSaveChange}> Save Changes </Button>
+            </Button.Group>
+        </Segment>
         </Segment>
     )
 }

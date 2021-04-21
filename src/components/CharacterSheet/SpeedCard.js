@@ -1,5 +1,5 @@
 import React from 'react'
-import { Item } from 'semantic-ui-react'
+import { Item, Segment } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 
 const SpeedCard = () => {
@@ -7,12 +7,15 @@ const SpeedCard = () => {
     const multiplier = Math.floor((character.dexterity - 10) / 2)
    
     return (
+        <Segment>
         <Item>
             <Item.Content verticalAlign='middle'>
-            <h2>Speed: {character.speed}ft.</h2>
+            <h3>Speed: {character.speed}ft.</h3>
             <h4>Initiative: {multiplier < 0 ? null : "+"}{multiplier}</h4>
             </Item.Content>    
         </Item>
+
+        </Segment>
     )
 }
 

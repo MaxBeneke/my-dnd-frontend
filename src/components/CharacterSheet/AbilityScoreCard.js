@@ -23,7 +23,7 @@ const AbilityScoreCard = ({ ability }) => {
     }
 
     return (
-        <Segment onDoubleClick={() => setIsEdit(true)} compact>
+        <Segment onDoubleClick={() => setIsEdit(true)} style={{width: '11.5em'}}>
             <h2>{ability.charAt(0).toUpperCase() + ability.slice(1)}</h2>
             { isEdit && <Button size='tiny' compact basic color='blue' onClick={()=> setIsEdit(false)}>Save</Button>}
             <h3>{character[ability]}</h3>
@@ -33,7 +33,7 @@ const AbilityScoreCard = ({ ability }) => {
                 <Button compact attached='right' icon='plus' onClick={handleAdd} />
                 </div>
             )}
-            <p>{multiplier(character[ability]) < 0 ? null : "+"}{multiplier(character[ability])}</p>
+            <h4>Modifier: {multiplier(character[ability]) < 0 ? null : "+"}{multiplier(character[ability])}</h4>
         </Segment>
     )
 }

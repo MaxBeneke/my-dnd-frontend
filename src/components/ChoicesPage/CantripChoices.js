@@ -3,7 +3,7 @@ import { Popup, Form, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { overrideCharacter } from '../redux/characterSlice'
 
-const CantripChoices = ({ cantripInfo, slotInfo }) => {
+const CantripChoices = ({ cantripInfo, slotInfo, handleIncomplete }) => {
     const dispatch = useDispatch();
     const character = useSelector((storeState) => storeState.character)
     const [counter, setCounter] = useState([])
@@ -18,7 +18,7 @@ const CantripChoices = ({ cantripInfo, slotInfo }) => {
             let reduxArr = character?.cantrips?.filter(cantrip => cantrip !== cantripName)
             dispatch(overrideCharacter({...character, cantrips: reduxArr}))
         } else if (counter.length + 1 > chooseFrom) {
-            alert(`You may only choose ${chooseFrom}`)
+            handleIncomplete(`You may only choose ${chooseFrom}`)
         } else {
             setCounter([...counter, number])
             if (character.cantrips) {

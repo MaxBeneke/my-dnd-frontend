@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Form, Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { overrideCharacter, updateCharacter } from '../redux/characterSlice'
+import { overrideCharacter } from '../redux/characterSlice'
 
 const EquipmentChoices = ( { classInfo }) => {
     const character = useSelector((storeState) => storeState.character)
     const dispatch = useDispatch();
     const [loggedClick, setLoggedClick] = useState(-1)
-    const nullEquip = {'1': '10 Gold', '2': 'Dagger', '3': 'Shortsword', '4': 'Leather Armor'}
+    const nullEquip = {'1': 'Dagger', '2': '10 Gold', '3': 'Shortsword', '4': 'Leather Armor'}
 
     const handleChange = (e) => {
         console.log(e.target)
@@ -40,9 +40,9 @@ const EquipmentChoices = ( { classInfo }) => {
                 onChange={handleChange}
                 options={chooseObj.from.map(equipOption => {
                     return {
-                    key: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index]}`,
-                    text: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index]}`,
-                    value: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index]}`
+                    key: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index + 1]}`,
+                    text: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index + 1]}`,
+                    value: `${equipOption?.equipment?.name ? equipOption?.equipment?.name : nullEquip[index + 1]}`
                     }
                 })}
             />

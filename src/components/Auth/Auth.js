@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateUser } from "../redux/userSlice"
 import { useHistory } from 'react-router-dom'
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button, Segment, Header } from "semantic-ui-react"
 
 
 const Auth = () => {
@@ -78,7 +78,8 @@ const Auth = () => {
     
 
     return (
-        <div style={{padding: '3em'}}>
+        <Segment basic padded='very'>
+          <Header as='h1' textAlign='center' style={{fontFamily: 'Aclonica', fontSize: '5em'}}>My DnD</Header>
         <Form onSubmit={handleSubmit}>
             <h2>{isLogin ? "Login" : "Signup"}</h2>
             <Form.Group widths="equal">
@@ -99,7 +100,7 @@ const Auth = () => {
                 onChange={updateForm}
               />
             </Form.Group>
-            <Form.Button type="submit">{isLogin ? "Login" : "Signup"}</Form.Button>
+            <Form.Button color='red' type="submit">{isLogin ? "Login" : "Signup"}</Form.Button>
           </Form>
           {errors.map(error => <p style={{color: 'red'}} key={error}>{error}</p>)}
           <Button
@@ -110,7 +111,7 @@ const Auth = () => {
           >
             {isLogin ? "Switch to Create Account" : "Switch to Login"}
           </Button>
-        </div>
+        </Segment>
     )
 }
 
