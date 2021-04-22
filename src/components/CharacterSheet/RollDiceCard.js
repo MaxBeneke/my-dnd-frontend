@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Segment, Dropdown, Button } from 'semantic-ui-react'
+import { Segment, Dropdown, Button, Modal } from 'semantic-ui-react'
 
 const RollDiceCard = () => {
     const [result, setResult] = useState("")
     const [dice, setDice] = useState(4)
+    const [openModal, setOpenModal] = useState(false)
     const options = [
         { key: 4, text: 'd4', value: 4 },
         { key: 6, text: 'd6', value: 6 },
@@ -20,6 +21,9 @@ const RollDiceCard = () => {
 
     const handleRoll = () => {
         const num = randomNumberGenerator(dice);
+        if (parseInt(dice) === 20 && parseInt(num) === 20) {
+            setOpenModal(true)
+        }
         setResult(num);
     }
 
@@ -39,6 +43,16 @@ const RollDiceCard = () => {
             />
             <Button onClick={handleRoll}>Roll!</Button>
             Result: {result}
+        <Modal
+            size='medium'
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+        >
+            <Modal.Header style={{fontFamily: 'Aclonica'}}>NAT 20!!!</Modal.Header>
+            <Modal.Content>
+                <h3>You rolled a natural 20! That's amazing!</h3>
+            </Modal.Content>
+        </Modal>
         </Segment>
     )
 }

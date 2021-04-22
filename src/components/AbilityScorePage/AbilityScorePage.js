@@ -18,6 +18,9 @@ const AbilityScorePage = () => {
     const [armorCheck, setArmorCheck] = useState(false)
     const [completeModal, setCompleteModal] = useState(false)
     const [openHelp, setOpenHelp] = useState(false)
+    const [openLimit, setOpenLimit] = useState(false)
+    const [limitMessage, setLimitMessage] = useState('')
+
     const query = gql`
     {
         abilityScores{
@@ -83,9 +86,15 @@ const AbilityScorePage = () => {
         setCompleteModal(true)
     }
 
+    const handleLimit = (message) => {
+        setLimitMessage(message)
+        setOpenLimit(true)
+    }
+
     const scoreMap = abilityScores.map(score => {
         return <Grid.Column>
                 <ScoreCounter
+                    handleLimit={handleLimit}
                     abbr={score.name}
                     fullName={score.full_name}
                     desc={score.desc}
@@ -138,6 +147,17 @@ const AbilityScorePage = () => {
             <Modal.Header>Ability Scores</Modal.Header>
             <Modal.Content>
             <p>{helpObject['AbilityScores']}</p>
+            </Modal.Content>
+        </Modal>
+        <Modal
+            name='Limit'
+            size='tiny'
+            open={openLimit}
+            onClose={() => setOpenLimit(false)}
+        >
+            <Modal.Header>Ability Scores</Modal.Header>
+            <Modal.Content>
+            <p>{limitMessage}</p>
             </Modal.Content>
         </Modal>
         </Segment>

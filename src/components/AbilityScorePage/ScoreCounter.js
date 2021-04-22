@@ -3,14 +3,14 @@ import { Popup, Button, Segment, Icon, Header } from 'semantic-ui-react'
 import { updateCharacter } from '../redux/characterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const ScoreCounter = ({ fullName, desc, bigCounter, addBigCounter, subtractBigCounter }) => {
+const ScoreCounter = ({ fullName, desc, bigCounter, addBigCounter, subtractBigCounter, handleLimit }) => {
     const dispatch = useDispatch();
     const character = useSelector((storeState) => storeState.character)
     const [counter, setCounter] = useState(8)
 
     const handleAdd = () => {
         if (counter + 1 === 16) {
-            alert('Maximum allowed for one Ability Score is 15')
+            handleLimit('Maximum allowed for one Ability Score is 15')
         } else if (counter + 1 >= 14 && bigCounter - 2 >= 0) {
             setCounter((counter) => counter + 1)
             dispatch(updateCharacter({[fullName.toLowerCase()]: counter + 1}))
@@ -20,13 +20,13 @@ const ScoreCounter = ({ fullName, desc, bigCounter, addBigCounter, subtractBigCo
             subtractBigCounter(1)
             dispatch(updateCharacter({[fullName.toLowerCase()]: counter + 1}))
         } else {
-            alert("You don't have any points left!")
+            handleLimit("You don't have any points left!")
         }
     }
 
     const handleSubtract= () => {
         if (counter - 1 === 7) {
-            alert('Minimum allowed for one Ability Score is 8')
+            handleLimit('Minimum allowed for one Ability Score is 8')
         } else if (counter - 1 >= 13) {
             setCounter((counter) => counter - 1)
             dispatch(updateCharacter({[fullName.toLowerCase()]: counter - 1}))
