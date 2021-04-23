@@ -36,7 +36,7 @@ function App() {
     <div className="App">
     <Switch>
       <Route exact path="/login">
-        <Auth />
+        <Auth key='login'/>
       </Route>
       <Route exact path="/user/:id">
         <UserPage />
@@ -55,6 +55,9 @@ function App() {
       </Route>
       <Route exact path='/ability-score'>
         <AbilityScorePage />
+      </Route>
+      <Route path='*'>
+        <Auth key='default' />
       </Route>
     </Switch>
     </div>

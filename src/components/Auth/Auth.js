@@ -32,7 +32,6 @@ const Auth = () => {
             .then(r => {
               return r.json().then(data => {
                 if (r.ok) {
-                  console.log(data)
                   return data
                 } else {
                   throw data
@@ -102,7 +101,7 @@ const Auth = () => {
             </Form.Group>
             <Form.Button color='red' type="submit">{isLogin ? "Login" : "Signup"}</Form.Button>
           </Form>
-          {errors.map(error => <p style={{color: 'red'}} key={error}>{error}</p>)}
+          {errors?.map(error => <p style={{color: 'red'}} key={error}>{error}</p>)}
           <Button
             basic
             color="blue"
