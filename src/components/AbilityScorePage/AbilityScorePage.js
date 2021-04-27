@@ -66,7 +66,7 @@ const AbilityScorePage = () => {
         } else if (!armorCheck && !completeModal) {
             alert('You have to add your race bonuses')
         } else {
-            fetch(`${process.env.REACT_APP_RAILS_URL}/characters`, {
+            fetch(`https://app-my-dnd.herokuapp.com/characters`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(character)

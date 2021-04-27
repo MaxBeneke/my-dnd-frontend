@@ -26,7 +26,7 @@ const CharacterSheet = () => {
     }, [])
 
     const handleSaveChange = () => {
-        fetch(`${process.env.REACT_APP_RAILS_URL}/character/${character.id}`, {
+        fetch(`https://app-my-dnd.herokuapp.com/character/${character.id}`, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(characterStore)
