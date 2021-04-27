@@ -24,7 +24,7 @@ const Auth = () => {
 
     const handleSubmit = () => {
         if (isLogin) {
-        fetch(`${process.env.REACT_APP_RAILS_URL}/users/login`, {
+        fetch(`http://localhost:3000/users/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
@@ -49,7 +49,7 @@ const Auth = () => {
             })
         }
         else {
-          fetch(`${process.env.REACT_APP_RAILS_URL}/users/signup`, {
+          fetch(`http://localhost:3000/users/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)

@@ -26,7 +26,7 @@ const CharacterSheet = () => {
     }, [])
 
     const handleSaveChange = () => {
-        fetch(`${process.env.REACT_APP_RAILS_URL}/character/${character.id}`, {
+        fetch(`http://localhost:3000/character/${character.id}`, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(characterStore)

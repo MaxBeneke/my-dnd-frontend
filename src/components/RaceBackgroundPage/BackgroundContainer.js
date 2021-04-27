@@ -8,7 +8,7 @@ const BackgroundContainer = () => {
     const [selectedBG, setSelectedBG] = useState(-1)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_RAILS_URL}/backgrounds/index`).then(r => r.json()).then(backgrounds => {
+        fetch(`http://localhost:3000/backgrounds/index`).then(r => r.json()).then(backgrounds => {
             setBackgrounds(backgrounds)
         })
     }, [])
