@@ -8,7 +8,7 @@ const BackgroundContainer = () => {
     const [selectedBG, setSelectedBG] = useState(-1)
 
     useEffect(() => {
-        fetch(`https://app-my-dnd.herokuapp.com/backgrounds/index`).then(r => r.json()).then(backgrounds => {
+        fetch(`${process.env.REACT_APP_RAILS_URL}/backgrounds/index`).then(r => r.json()).then(backgrounds => {
             setBackgrounds(backgrounds)
         })
     }, [])
