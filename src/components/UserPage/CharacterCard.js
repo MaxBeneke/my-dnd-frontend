@@ -23,7 +23,7 @@ const CharacterCard = ({ level, character_class, race, subrace, name, id}) => {
     }
 
     const handleDelete = (id) => {
-        fetch(`${process.env.REACT_APP_RAILS_URL}/character/${id}`, {
+        fetch(`http://localhost:3000/character/${id}`, {
             method: 'DELETE'
         })
         .then(r => r.json())

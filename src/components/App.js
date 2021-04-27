@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    fetch(`${process.env.REACT_APP_RAILS_URL}/me`, {
+    fetch(`http://localhost:3000/me`, {
       headers: {
         Authorization: `Bearer ${token}`}
     })
