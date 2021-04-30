@@ -15,7 +15,7 @@ To run this project locally using npm
 ```
 $ npm install
 $ npm install react-router-dom
-$ npm install semantic-ui-react
+$ npm install semantic-ui-react semantic-ui-css
 $ npm add graphql-request graphql
 ```
 # Next Steps
