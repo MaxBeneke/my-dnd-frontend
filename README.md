@@ -1,6 +1,6 @@
 # My DnD
 
-My DnD is a Dungeons and Dragons Character Creation application. It is meant to be an accessible way for newcomers to the Dungeons and Dragons community orient themselves with the complex process of creating one's character. The interface is as user-friendly as possible, and also streamlines a lot of the decisions and branching pathways one can take through dynamic choice generation, making it desirable for veteran players as well. Upon completion of a character, the app with auto-generate a character sheet using the information chose and allows for users to go in and make changes to their sheet as desired.
+My DnD is a 'Dungeons and Dragons' Character Creation application. It is meant to be an accessible way for newcomers to the Dungeons and Dragons community to orient themselves with the complex process of creating one's character. The interface is as user-friendly as possible, and also streamlines a lot of the decisions and branching pathways one can take through dynamic choice generation, making it desirable for veteran players as well. Upon completion of a character, the app will auto-generate a character sheet using the information chosen and allow for users to go in and make changes to their sheet as desired.
 
 # Technologies
 This project is created with:
