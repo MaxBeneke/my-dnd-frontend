@@ -9,6 +9,7 @@ This project is created with:
 * Redux 4.1.0
 * Rails 6
 * GraphQL (https://github.com/prisma-labs/graphql-request)
+* DnD 5e API (http://www.dnd5eapi.co/)
 
 # Setup
 To run this project locally using npm
