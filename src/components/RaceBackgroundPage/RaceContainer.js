@@ -33,12 +33,6 @@ const RaceContainer = () => {
           traits{
             name
           }
-          trait_options{
-              choose
-            from {
-              name
-            }
-          }
         }
         }
         `
@@ -49,10 +43,8 @@ const RaceContainer = () => {
                 name={race.name}
                 speed={race.speed}
                 languages={race.languages}
-                traitOptions={race.trait_options}
                 abilityBonuses={race.ability_bonuses}
                 startingProficiencies={race.starting_proficiencies}
-                startingProficiencyOptions={race.starting_proficiency_options}
                 traits={race.traits}
                 selectedRace={selectedRace}
                 setSelectedRace={setSelectedRace}

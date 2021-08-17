@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { updateCharacter } from '../redux/characterSlice'
 import { request, gql } from 'graphql-request'
 
-const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencies, traitOptions, startingProficiencyOptions, traits, selectedRace, setSelectedRace}) => {
+const RaceCard = ({ name, speed, languages, abilityBonuses, startingProficiencies, traits, selectedRace, setSelectedRace}) => {
     const [traitDesc, setTraitDesc] = useState([])
     const storeProficiencies = startingProficiencies.map(prof => prof.name)
     const storeTraits = traits.map(trait => trait.name)
